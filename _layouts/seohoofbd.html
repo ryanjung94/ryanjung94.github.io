@@ -216,6 +216,19 @@
     .venue-card { background:#fff; padding:30px 22px 24px; border:1px solid var(--line); border-radius:6px; }
     .venue-card__symbol { display:grid; place-items:center; margin:0 auto 17px; width:64px; height:64px; border-radius:50%; background:#f3eae2; color:var(--accent-dark); }
     .venue-card__symbol svg { width:29px; height:29px; }
+    /* 네이버 지도: Client ID를 입력하지 않았을 때는 OSM 위치 미리보기가 표시됩니다. */
+    .venue-card__map {
+      position:relative; width:100%; height:clamp(220px, 66vw, 300px);
+      margin:0 auto 22px; background:#eee8e1; border:1px solid #eee4db;
+      border-radius:6px; overflow:hidden;
+    }
+    .venue-card__map iframe, .venue-card__map-canvas {
+      position:absolute; inset:0; display:block; width:100%; height:100%; border:0;
+    }
+    .venue-card__map-canvas { opacity:0; pointer-events:none; }
+    .venue-card__map.is-naver-ready .venue-card__map-canvas { opacity:1; pointer-events:auto; }
+    .venue-card__map.is-naver-ready iframe { visibility:hidden; }
+    .venue-card__map-caption { font-size:11px; color:var(--muted); line-height:1.7; margin:-9px 0 19px; }
     .venue-card__name { font:700 20px/1.5 var(--font-serif); margin:0 0 8px; }
     .venue-card__hall { font-size:12px; color:#88786c; margin:0 0 16px; }
     .venue-card__address { font-size:13px; color:#665d56; line-height:1.75; margin:0 0 23px; }
@@ -335,6 +348,12 @@
       <p class="section__description">함께해 주실 발걸음을 기다립니다.</p>
       <div class="venue-card">
         <div class="venue-card__symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.55"><path d="M20 10c0 5.5-8 11-8 11S4 15.5 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <!-- 네이버 지도 API Client ID가 없을 때에는 핀 표시된 OSM 미리보기를 보여줍니다. -->
+        <div class="venue-card__map" id="venue-map" aria-label="돌잔치 장소 지도">
+          <iframe id="map-fallback" title="그랜드웨딩홀 위치 지도 미리보기" loading="lazy" referrerpolicy="no-referrer" aria-label="그랜드웨딩홀 위치를 표시한 지도"></iframe>
+          <div class="venue-card__map-canvas" id="naver-map" role="region" aria-label="네이버 지도, 그랜드웨딩홀 위치"></div>
+        </div>
+        <p class="venue-card__map-caption" id="venue-map-caption">위치 미리보기 · 네이버 지도에서 길찾기는 아래 버튼을 눌러주세요.</p>
         <h3 class="venue-card__name" id="venue-name">돌잔치 장소를 입력해 주세요</h3>
         <p class="venue-card__hall" id="venue-hall">홀 / 층 정보</p>
         <p class="venue-card__address" id="venue-address">주소를 입력해 주세요</p>
@@ -404,9 +423,15 @@
       },
       venue: {
         name: '그랜드웨딩홀',
-        hall: '8층',
+        hall: '8층 스카이부페',
         address: '경기도 이천시 중리천로 98',
-        naverMapUrl: 'https://naver.me/G1wS0Hc7'
+        naverMapUrl: 'https://naver.me/G1wS0Hc7',
+        // 실제 네이버 지도를 띄우려면 네이버 클라우드 Maps의 Client ID만 입력하세요.
+        // Client Secret은 공개 HTML에 절대 넣지 마세요.
+        naverMapClientId: '',
+        // 경기도 이천시 중리천로 98 (그랜드웨딩홀 건물 중심 좌표)
+        mapLat: 37.2775658,
+        mapLng: 127.4477893
       },
       accounts: [
         { label: '아빠', bank: '카카오뱅크', number: '3333012552543', holder: '정주호' },
@@ -592,6 +617,62 @@
       ? `https://map.naver.com/p/search/${encodeURIComponent(searchText)}`
       : 'https://map.naver.com/');
     $('copy-address').addEventListener('click', () => copyText(venue.address, '주소를 복사했습니다.'));
+
+    // 1) Client ID 없이도 보이는 핀 지도 미리보기(OpenStreetMap).
+    //    네이버 지도 API 인증이 완료되면 아래 지도 위에 실제 네이버지도를 표시합니다.
+    const mapBox = $('venue-map');
+    const mapFrame = $('map-fallback');
+    const mapCaption = $('venue-map-caption');
+    const latitude = Number(venue.mapLat);
+    const longitude = Number(venue.mapLng);
+    if (Number.isFinite(latitude) && Number.isFinite(longitude)
+        && Math.abs(latitude) <= 90 && Math.abs(longitude) <= 180) {
+      const bbox = [longitude - 0.0032, latitude - 0.0018,
+                    longitude + 0.0032, latitude + 0.0018].join(',');
+      const params = new URLSearchParams({
+        bbox, layer: 'mapnik', marker: `${latitude},${longitude}`
+      });
+      mapFrame.src = `https://www.openstreetmap.org/export/embed.html?${params}`;
+    } else {
+      mapBox.hidden = true;
+      mapCaption.textContent = '지도 좌표를 설정해 주세요.';
+    }
+
+    // 2) Client ID 입력 시 네이버 공식 Maps JavaScript API로 지도 + 장소 핀 표시.
+    //    GitHub Pages에서는 도메인을 네이버 클라우드 애플리케이션에 등록해야 합니다.
+    const clientId = (venue.naverMapClientId || '').trim();
+    if (clientId && !mapBox.hidden) {
+      window.navermap_authFailure = () => {
+        mapBox.classList.remove('is-naver-ready');
+        mapCaption.textContent = '네이버 지도 인증에 실패했습니다. 아래 버튼으로 위치를 확인해 주세요.';
+      };
+      const mapScript = document.createElement('script');
+      mapScript.src = 'https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId='
+                    + encodeURIComponent(clientId);
+      mapScript.async = true;
+      mapScript.onload = () => {
+        try {
+          if (!window.naver || !naver.maps) throw new Error('Naver Maps SDK not available');
+          const point = new naver.maps.LatLng(latitude, longitude);
+          mapBox.classList.add('is-naver-ready');
+          const map = new naver.maps.Map('naver-map', {
+            center: point, zoom: 16, scrollWheel: false, zoomControl: true,
+            zoomControlOptions: { position: naver.maps.Position.TOP_RIGHT }
+          });
+          new naver.maps.Marker({ position: point, map, title: venue.name });
+          mapCaption.textContent = '네이버 지도 · 지도 위의 핀이 돌잔치 장소입니다.';
+        } catch (error) {
+          mapBox.classList.remove('is-naver-ready');
+          mapCaption.textContent = '네이버 지도 로딩에 문제가 있습니다. 아래 버튼으로 확인해 주세요.';
+          console.error('네이버 지도 로딩 오류:', error);
+        }
+      };
+      mapScript.onerror = () => {
+        mapCaption.textContent = '네이버 지도를 불러오지 못했습니다. 아래 버튼으로 확인해 주세요.';
+      };
+      document.head.appendChild(mapScript);
+    }
+
 
     // 계좌번호는 기본적으로 접혀 있으며, 번호가 있는 경우에만 복사할 수 있습니다.
     const accountList = $('account-list');
