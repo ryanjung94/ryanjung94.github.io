@@ -8,6 +8,7 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="정서후의 첫 번째 생일에 초대합니다">
   <meta property="og:description" content="2026년 12월 13일 일요일 오후 1시, 함께 축하해 주세요.">
+  <meta property="og:image" content="https://ryanjung94.github.io/assets/seohoo/images/main.jpg">
   <!-- 실제 웹사이트에 게시할 경우, 공유 미리보기 사진을 절대 URL로 입력하세요.
        예: <meta property="og:image" content="https://example.com/images/main.jpg"> -->
   <title>정서후 첫돌 초대장</title>
@@ -355,23 +356,24 @@
       babyName: '정서후',
       eventDate: '2026-12-13T13:00:00+09:00',
       photos: {
-        main: 'images/main.jpg',
-        gallery: [
-          'images/01.jpg',
-          'images/02.jpg',
-          'images/03.jpg',
-          'images/04.jpg'
-        ]
-      },
+         mainImage: "/assets/seohoo/images/main.jpg",
+
+          galleryImages: [
+            "/assets/seohoo/images/01.jpg",
+            "/assets/seohoo/images/02.jpg",
+            "/assets/seohoo/images/03.jpg",
+            "/assets/seohoo/images/04.jpg"
+          ]
+    },
       venue: {
-        name: '',       // 예: '○○호텔'
-        hall: '',       // 예: '3층 로즈홀'
-        address: '',    // 예: '서울특별시 ○○구 ○○로 123'
-        naverMapUrl: '' // 네이버 지도의 '공유' 링크를 붙여넣으면 가장 정확합니다.
+        name: '그랜드웨딩홀',       // 예: '○○호텔'
+        hall: '8층',       // 예: '3층 로즈홀'
+        address: '경기도 이천시 중리천로 98',    // 예: '서울특별시 ○○구 ○○로 123'
+        naverMapUrl: 'https://naver.me/G1wS0Hc7' // 네이버 지도의 '공유' 링크를 붙여넣으면 가장 정확합니다.
       },
       accounts: [
-        { label: '아빠', bank: '', number: '', holder: '' },
-        { label: '엄마', bank: '', number: '', holder: '' }
+        { label: '아빠', bank: '카카오뱅크', number: '3333012552543', holder: '정주호' },
+        { label: '엄마', bank: '토스뱅크', number: '100089226463', holder: '송정은' }
       ]
     };
 
