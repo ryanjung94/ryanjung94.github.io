@@ -154,8 +154,36 @@
     .section__ornament::before, .section__ornament::after { content: ""; height: 1px; width: 39px; background: var(--line); }
     .date-card { border: 1px solid #e4d9ce; background: rgba(255,255,255,.58); padding: 29px 18px 30px; border-radius: 6px; }
     .date-card__month { font-family: var(--font-serif); font-size: 14px; color: #8c7867; letter-spacing: .14em; }
-    .date-card__day { font: 400 77px/1.18 var(--font-serif); letter-spacing: -.045em; margin: 4px 0 0; }
-    .date-card__weekday { color: var(--accent-dark); font-size: 11px; letter-spacing: .19em; margin-top: 4px; }
+    /* SAVE THE DATE: 반응형 월간 달력 */
+    .date-card__calendar { width: 100%; max-width: 298px; margin: 22px auto 3px; }
+    .date-card__weekdays, .date-card__days {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 5px 2px;
+    }
+    .date-card__weekdays { margin-bottom: 11px; }
+    .date-card__weekday-label {
+      font-size: 10px; color: #8c7867; font-weight: 600;
+      line-height: 26px; letter-spacing: .02em;
+    }
+    .date-card__weekday-label:first-child { color: var(--accent-dark); }
+    .date-card__date {
+      display: flex; align-items: center; justify-content: center;
+      width: min(100%, 36px); aspect-ratio: 1;
+      margin-inline: auto;
+      border: 2px solid transparent;
+      border-radius: 50%;
+      font: 400 13px/1 var(--font-serif);
+      color: var(--ink);
+    }
+    .date-card__date--sun { color: var(--accent-dark); }
+    .date-card__date--event {
+      border-color: var(--accent-dark);
+      background: #f8ebe4;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+    .date-card__date--empty { visibility: hidden; }
     .date-card__divider { height: 1px; background: #e7ded5; margin: 25px auto 21px; width: 62%; }
     .date-card__time { font-size: 15px; font-weight: 600; }
     .date-card__note { margin: 7px 0 0; font-size: 11px; color: var(--muted); }
@@ -238,7 +266,7 @@
 <body>
   <main class="page">
     <header class="site-heading">
-      <div class="brand">Seohoo<span class="little">.</span></div>
+      <div class="brand">Seohu<span class="little">.</span></div>
       <span class="site-heading__right">THE FIRST BIRTHDAY</span>
     </header>
 
@@ -248,7 +276,7 @@
       <span class="cover__shape cover__shape--small" aria-hidden="true"></span>
       <div class="cover__fallback" aria-hidden="true"><strong>ONE</strong><small>OUR LITTLE SUNSHINE</small></div>
       <img class="cover__image" id="cover-image" alt="정서후 아기의 대표 사진">
-      <figcaption class="cover__ribbon">SEOHOO · FIRST BIRTHDAY</figcaption>
+      <figcaption class="cover__ribbon">SEOHU · FIRST BIRTHDAY</figcaption>
     </figure>
 
     <!-- 02. 아기 이름 / 초대 문구 -->
@@ -268,8 +296,18 @@
       <div class="section__ornament" aria-hidden="true">✳</div>
       <div class="date-card">
         <div class="date-card__month" id="date-month">2026. 12</div>
-        <div class="date-card__day" id="date-day">13</div>
-        <div class="date-card__weekday" id="date-weekday">SUNDAY</div>
+        <div class="date-card__calendar" id="event-calendar" role="group" aria-label="2026년 12월 달력">
+          <div class="date-card__weekdays" aria-hidden="true">
+            <span class="date-card__weekday-label">일</span>
+            <span class="date-card__weekday-label">월</span>
+            <span class="date-card__weekday-label">화</span>
+            <span class="date-card__weekday-label">수</span>
+            <span class="date-card__weekday-label">목</span>
+            <span class="date-card__weekday-label">금</span>
+            <span class="date-card__weekday-label">토</span>
+          </div>
+          <div class="date-card__days" id="event-calendar-days"></div>
+        </div>
         <div class="date-card__divider"></div>
         <time class="date-card__time" id="event-time" datetime="2026-12-13T13:00:00+09:00">2026년 12월 13일 (일) 오후 1시</time>
         <p class="date-card__note">소중한 만남을 기다릴게요.</p>
@@ -329,9 +367,9 @@
     <footer class="footer">
       <div class="footer__flower" aria-hidden="true">✳</div>
       <p class="footer__title">서후의 첫 번째 생일,<br>함께해 주셔서 고맙습니다.</p>
-      <p class="footer__sub">2026. 12. 13 · SEOHOO'S 1ST BIRTHDAY</p>
+      <p class="footer__sub">2026. 12. 13 · SEOHU'S 1ST BIRTHDAY</p>
       <button class="share-button" id="share-button" type="button">초대장 공유하기 ↗</button>
-      <div class="footer__bottom">MADE WITH LOVE FOR SEOHOO</div>
+      <div class="footer__bottom">MADE WITH LOVE FOR SEOHU</div>
     </footer>
   </main>
 
@@ -356,19 +394,19 @@
       babyName: '정서후',
       eventDate: '2026-12-13T13:00:00+09:00',
       photos: {
-          main: '/assets/seohoo/images/main.jpg',
-          gallery: [
-            '/assets/seohoo/images/01.jpg',
-            '/assets/seohoo/images/02.jpg',
-            '/assets/seohoo/images/03.jpg',
-            '/assets/seohoo/images/04.jpg'
-          ]
-    },
+        main: '/assets/seohoo/images/main.jpg',
+        gallery: [
+          '/assets/seohoo/images/01.jpg',
+          '/assets/seohoo/images/02.jpg',
+          '/assets/seohoo/images/03.jpg',
+          '/assets/seohoo/images/04.jpg'
+        ]
+      },
       venue: {
-        name: '그랜드웨딩홀',       // 예: '○○호텔'
-        hall: '8층',       // 예: '3층 로즈홀'
-        address: '경기도 이천시 중리천로 98',    // 예: '서울특별시 ○○구 ○○로 123'
-        naverMapUrl: 'https://naver.me/G1wS0Hc7' // 네이버 지도의 '공유' 링크를 붙여넣으면 가장 정확합니다.
+        name: '그랜드웨딩홀',
+        hall: '8층',
+        address: '경기도 이천시 중리천로 98',
+        naverMapUrl: 'https://naver.me/G1wS0Hc7'
       },
       accounts: [
         { label: '아빠', bank: '카카오뱅크', number: '3333012552543', holder: '정주호' },
@@ -435,11 +473,32 @@
       const hour12 = hour % 12 || 12;
       const timeLabel = `${year}년 ${month}월 ${day}일 (${koreanDays[weekIndex]}) ${ampm} ${hour12}시${minute ? ` ${minute}분` : ''}`;
       $('date-month').textContent = `${year}. ${String(month).padStart(2, '0')}`;
-      $('date-day').textContent = String(day).padStart(2, '0');
-      $('date-weekday').textContent = englishDays[weekIndex];
+      $('event-calendar').setAttribute('aria-label', `${year}년 ${month}월 달력`);
+      const calendarDays = $('event-calendar-days');
+      calendarDays.replaceChildren();
+      const firstWeekday = new Date(Date.UTC(year, month - 1, 1)).getUTCDay();
+      const lastDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+      for (let offset = 0; offset < firstWeekday; offset++) {
+        const empty = document.createElement('span');
+        empty.className = 'date-card__date date-card__date--empty';
+        empty.setAttribute('aria-hidden', 'true');
+        calendarDays.appendChild(empty);
+      }
+      for (let date = 1; date <= lastDay; date++) {
+        const item = document.createElement('span');
+        const weekday = (firstWeekday + date - 1) % 7;
+        item.className = 'date-card__date';
+        if (weekday === 0) item.classList.add('date-card__date--sun');
+        if (date === day) {
+          item.classList.add('date-card__date--event');
+          item.setAttribute('aria-label', `${month}월 ${date}일 돌잔치`);
+        }
+        item.textContent = String(date);
+        calendarDays.appendChild(item);
+      }
       $('event-time').textContent = timeLabel;
       $('event-time').dateTime = INVITATION.eventDate;
-      document.querySelector('.footer__sub').textContent = `${year}. ${String(month).padStart(2, '0')}. ${String(day).padStart(2, '0')} · SEOHOO'S 1ST BIRTHDAY`;
+      document.querySelector('.footer__sub').textContent = `${year}. ${String(month).padStart(2, '0')}. ${String(day).padStart(2, '0')} · SEOHU'S 1ST BIRTHDAY`;
     }
 
     document.title = `${INVITATION.babyName} 첫돌 초대장`;
