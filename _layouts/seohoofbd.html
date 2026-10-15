@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f8f5ef">
+  <meta name="description" content="정서후의 첫 번째 생일에 소중한 분들을 초대합니다. 2026년 12월 13일 오후 1시">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="정서후의 첫 번째 생일에 초대합니다">
+  <meta property="og:description" content="2026년 12월 13일 일요일 오후 1시, 함께 축하해 주세요.">
+  <!-- 실제 웹사이트에 게시할 경우, 공유 미리보기 사진을 절대 URL로 입력하세요.
+       예: <meta property="og:image" content="https://example.com/images/main.jpg"> -->
+  <title>정서후 첫돌 초대장</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --cream: #f8f5ef;
+      --paper: #fffcf8;
+      --ink: #493f37;
+      --muted: #8d8177;
+      --line: #e8dfd4;
+      --accent: #b88472;
+      --accent-dark: #9b6856;
+      --sage: #a5b19a;
+      --font-serif: "Gowun Batang", "Nanum Myeongjo", Georgia, serif;
+      --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #eeebe6;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      word-break: keep-all;
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; }
+    a { color: inherit; }
+    .page {
+      width: 100%;
+      max-width: 492px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--paper);
+      box-shadow: 0 14px 60px rgba(53, 42, 30, .075);
+      overflow: hidden;
+    }
+    .eyebrow {
+      margin: 0;
+      color: var(--accent-dark);
+      font-size: 11px;
+      letter-spacing: .24em;
+      font-weight: 600;
+    }
+    .site-heading {
+      padding: 27px 26px 23px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { font: 700 16px var(--font-serif); letter-spacing: .05em; }
+    .brand .little { color: var(--accent); }
+    .site-heading__right { color: var(--muted); font-size: 10px; letter-spacing: .12em; }
+    .cover {
+      position: relative;
+      margin: 0 20px;
+      aspect-ratio: 4 / 4.8;
+      overflow: hidden;
+      background: linear-gradient(140deg, #e8d6cc 0%, #f5e6da 42%, #e2cbbb 100%);
+      border-radius: 190px 190px 9px 9px;
+      isolation: isolate;
+    }
+    .cover::before {
+      content: "";
+      position: absolute;
+      width: 118%; height: 67%; left: -7%; bottom: -23%;
+      border-radius: 50% 50% 0 0;
+      background: rgba(255,255,255,.22);
+      z-index: 0;
+    }
+    .cover::after {
+      content: "";
+      position: absolute;
+      inset: 45% 0 0;
+      background: linear-gradient(transparent, rgba(61,38,27,.38));
+      z-index: 2;
+      pointer-events: none;
+    }
+    .cover__shape {
+      position: absolute;
+      z-index: 0;
+      width: 175px; height: 175px;
+      background: #fcf2e9;
+      opacity: .42;
+      border-radius: 50%;
+      top: 15%; right: -12%;
+    }
+    .cover__shape--small {
+      width: 115px; height: 115px;
+      top: 43%; left: -7%; right: auto;
+      opacity: .28;
+      background: #c8aaa0;
+    }
+    .cover__fallback {
+      position: absolute;
+      z-index: 1;
+      top: 44%; left: 0; right: 0;
+      transform: translateY(-50%);
+      text-align: center;
+      font-family: var(--font-serif);
+      color: #fffaf3;
+      text-shadow: 0 3px 15px rgba(135, 83, 60, .16);
+    }
+    .cover__fallback strong { display: block; font-size: clamp(75px, 20vw, 115px); line-height: 1; font-weight: 400; letter-spacing: -.075em; }
+    .cover__fallback small { display: block; margin-top: 18px; letter-spacing: .23em; font-size: 11px; }
+    .cover__image {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .cover.has-image .cover__image { display: block; }
+    .cover.has-image .cover__fallback { display: none; }
+    .cover__ribbon {
+      position: absolute;
+      z-index: 3;
+      left: 0; right: 0; bottom: 25px;
+      color: white;
+      text-align: center;
+      letter-spacing: .21em;
+      font-size: 12px;
+      font-weight: 500;
+      text-shadow: 0 2px 5px rgba(0,0,0,.17);
+    }
+    .intro { text-align: center; padding: 41px 26px 69px; }
+    .intro__star { color: var(--accent); font-size: 20px; line-height: 1; margin-bottom: 18px; }
+    h1, h2, p { margin-top: 0; }
+    .intro h1 { margin: 10px 0 12px; font: 700 40px var(--font-serif); letter-spacing: .045em; }
+    .intro__subtitle { margin: 0; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+    .intro__title { font: 400 24px/1.65 var(--font-serif); margin: 37px 0 14px; }
+    .intro__message { font-size: 13px; line-height: 2.15; color: #776d63; margin: 0; }
+    .section { padding: 66px 28px; text-align: center; }
+    .section--tint { background: var(--cream); }
+    .section__heading { margin: 10px 0 11px; font: 400 26px/1.5 var(--font-serif); }
+    .section__description { color: var(--muted); font-size: 12px; line-height: 1.9; margin-bottom: 32px; }
+    .section__ornament { display: flex; gap: 10px; align-items: center; justify-content: center; margin: 0 0 28px; color: var(--accent); }
+    .section__ornament::before, .section__ornament::after { content: ""; height: 1px; width: 39px; background: var(--line); }
+    .date-card { border: 1px solid #e4d9ce; background: rgba(255,255,255,.58); padding: 29px 18px 30px; border-radius: 6px; }
+    .date-card__month { font-family: var(--font-serif); font-size: 14px; color: #8c7867; letter-spacing: .14em; }
+    .date-card__day { font: 400 77px/1.18 var(--font-serif); letter-spacing: -.045em; margin: 4px 0 0; }
+    .date-card__weekday { color: var(--accent-dark); font-size: 11px; letter-spacing: .19em; margin-top: 4px; }
+    .date-card__divider { height: 1px; background: #e7ded5; margin: 25px auto 21px; width: 62%; }
+    .date-card__time { font-size: 15px; font-weight: 600; }
+    .date-card__note { margin: 7px 0 0; font-size: 11px; color: var(--muted); }
+    .gallery { padding-left: 20px; padding-right: 20px; }
+    .gallery__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .photo-card {
+      display: block;
+      position: relative;
+      border: 0;
+      padding: 0;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 4px;
+      background: linear-gradient(145deg, #e7d7c7, #f9ede1 67%, #e4c5af);
+      cursor: zoom-in;
+    }
+    .photo-card:nth-child(2) { background: linear-gradient(145deg,#d9dfd2,#f4f0e4 70%,#dadac6); }
+    .photo-card:nth-child(3) { background: linear-gradient(145deg,#eaded9,#f8f0ea 55%,#ddd0cc); }
+    .photo-card:nth-child(4) { background: linear-gradient(145deg,#e4d8c4,#f9eadf 60%,#dbc4a4); }
+    .photo-card__placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; position:absolute; inset:0; color:#9f8877; font-family:var(--font-serif); }
+    .photo-card__placeholder span { font-size: 31px; font-weight:400; opacity:.65; }
+    .photo-card__placeholder small { font-size: 11px; margin-top: 8px; }
+    .photo-card img { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; }
+    .photo-card.has-image img { display:block; }
+    .photo-card.has-image .photo-card__placeholder { display:none; }
+    @media (hover:hover) { .photo-card.has-image:hover img { transform:scale(1.045); } }
+    .gallery__hint { display:flex; justify-content:center; gap:7px; align-items:center; margin-top:19px; color:var(--muted); font-size:11px; }
+    .gallery__hint svg { width:14px; height:14px; }
+    .venue-card { background:#fff; padding:30px 22px 24px; border:1px solid var(--line); border-radius:6px; }
+    .venue-card__symbol { display:grid; place-items:center; margin:0 auto 17px; width:64px; height:64px; border-radius:50%; background:#f3eae2; color:var(--accent-dark); }
+    .venue-card__symbol svg { width:29px; height:29px; }
+    .venue-card__name { font:700 20px/1.5 var(--font-serif); margin:0 0 8px; }
+    .venue-card__hall { font-size:12px; color:#88786c; margin:0 0 16px; }
+    .venue-card__address { font-size:13px; color:#665d56; line-height:1.75; margin:0 0 23px; }
+    .button { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; min-height:51px; border-radius:4px; text-decoration:none; font-size:13px; font-weight:600; border:1px solid transparent; cursor:pointer; transition:filter .2s ease; }
+    .button:hover { filter:brightness(.97); }
+    .button--naver { background:#03c75a; color:white; }
+    .button--naver strong { display:grid; place-items:center; width:20px; height:20px; background:white; color:#03c75a; border-radius:4px; font-size:14px; line-height:1; font-family:Arial, sans-serif; }
+    .button--subtle { border-color:#e2d9d0; color:var(--ink); background:#fff; margin-top:9px; }
+    .button svg { width:17px; height:17px; }
+    .venue-card__note { margin:18px 0 0; font-size:11px; line-height:1.8; color:var(--muted); }
+    .accounts__details { text-align:left; border:1px solid var(--line); border-radius:6px; background:white; overflow:hidden; }
+    .accounts__details summary { display:flex; align-items:center; justify-content:space-between; padding:20px; cursor:pointer; font-size:14px; font-weight:600; list-style:none; }
+    .accounts__details summary::-webkit-details-marker { display:none; }
+    .accounts__chevron { width:18px; height:18px; color:var(--accent); transition:transform .2s ease; }
+    .accounts__details[open] .accounts__chevron { transform:rotate(180deg); }
+    .accounts__body { padding:1px 20px 17px; border-top:1px solid #f0e9e2; }
+    .account { padding:19px 0 13px; }
+    .account + .account { border-top:1px solid #f0e9e2; }
+    .account__label { color:var(--accent-dark); font-size:12px; margin:0 0 10px; font-weight:600; }
+    .account__bank { color:var(--ink); font-size:14px; font-weight:600; }
+    .account__holder { color:var(--muted); font-size:11px; margin-top:6px; }
+    .account__line { display:flex; justify-content:space-between; gap:10px; align-items:center; }
+    .account__number { font-size:12px; color:#645c54; word-break:break-all; margin-top:5px; }
+    .copy-button { border:1px solid #e6ddd4; background:#faf8f5; border-radius:4px; padding:9px 12px; font-size:11px; color:#685b4e; flex:0 0 auto; cursor:pointer; }
+    .copy-button:disabled { opacity:.45; cursor:not-allowed; }
+    .accounts__note { margin:15px 0 0; font-size:11px; color:var(--muted); line-height:1.9; }
+    .footer { padding:61px 24px 49px; text-align:center; background:#f0e8df; }
+    .footer__flower { font-size:30px; color:var(--accent); margin-bottom:16px; }
+    .footer__title { font:400 20px/1.7 var(--font-serif); margin:0 0 13px; }
+    .footer__sub { color:#897a6e; font-size:12px; margin:0 0 28px; }
+    .footer__bottom { font-size:11px; letter-spacing:.18em; color:#b39f91; }
+    .share-button { border:1px solid #cdbdaf; background:transparent; color:#63574d; padding:12px 20px; border-radius:100px; cursor:pointer; font-size:12px; margin-bottom:40px; }
+    .lightbox { position:fixed; inset:0; background:rgba(24,20,18,.94); z-index:1000; display:none; align-items:center; justify-content:center; padding:70px 14px; }
+    .lightbox[aria-hidden="false"] { display:flex; }
+    .lightbox__image { display:block; max-width:100%; max-height:78vh; object-fit:contain; }
+    .lightbox__close, .lightbox__arrow { position:absolute; display:grid; place-items:center; border:0; color:white; background:rgba(255,255,255,.13); border-radius:50%; cursor:pointer; }
+    .lightbox__close { top:20px; right:20px; width:42px; height:42px; font-size:25px; }
+    .lightbox__arrow { width:44px; height:44px; top:50%; transform:translateY(-50%); font-size:30px; }
+    .lightbox__arrow--prev { left:12px; } .lightbox__arrow--next { right:12px; }
+    .lightbox__counter { position:absolute; bottom:25px; color:#fff; opacity:.8; font-size:12px; letter-spacing:.15em; }
+    .toast { position:fixed; bottom:25px; left:50%; transform:translate(-50%,10px); max-width:min(90vw,400px); padding:12px 18px; border-radius:9px; background:#493f37; color:#fff; font-size:12px; box-shadow:0 9px 25px rgba(0,0,0,.15); opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; z-index:2000; white-space:nowrap; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media (max-width:380px) { .intro__title { font-size:21px; } .section { padding:57px 20px; } .cover { margin:0 13px; } .site-heading { padding-left:20px; padding-right:20px; } .gallery { padding-left:13px; padding-right:13px; } }
+    @media (min-width:600px) { body { padding:42px 0; } .page { border-radius:8px; } }
+    @media (prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="site-heading">
+      <div class="brand">Seohoo<span class="little">.</span></div>
+      <span class="site-heading__right">THE FIRST BIRTHDAY</span>
+    </header>
+
+    <!-- 01. 대표 사진 -->
+    <figure class="cover" id="cover">
+      <span class="cover__shape" aria-hidden="true"></span>
+      <span class="cover__shape cover__shape--small" aria-hidden="true"></span>
+      <div class="cover__fallback" aria-hidden="true"><strong>ONE</strong><small>OUR LITTLE SUNSHINE</small></div>
+      <img class="cover__image" id="cover-image" alt="정서후 아기의 대표 사진">
+      <figcaption class="cover__ribbon">SEOHOO · FIRST BIRTHDAY</figcaption>
+    </figure>
+
+    <!-- 02. 아기 이름 / 초대 문구 -->
+    <section class="intro" aria-labelledby="intro-name">
+      <div class="intro__star" aria-hidden="true">✳</div>
+      <p class="eyebrow">HAPPY FIRST BIRTHDAY</p>
+      <h1 id="intro-name">정서후</h1>
+      <p class="intro__subtitle">우리 아기의 첫 번째 생일</p>
+      <h2 class="intro__title">첫 번째 생일에<br>소중한 분들을 초대합니다.</h2>
+      <p class="intro__message">작고 소중한 서후가 어느덧 첫돌을 맞이합니다.<br>따뜻한 사랑으로 지켜봐 주신 분들과<br>기쁜 순간을 함께 나누고 싶습니다.<br>귀한 걸음 하시어 축복해 주시면 감사하겠습니다.</p>
+    </section>
+
+    <!-- 03. 행사 일시 -->
+    <section class="section section--tint" aria-labelledby="when-title">
+      <p class="eyebrow">SAVE THE DATE</p>
+      <h2 class="section__heading" id="when-title">서후의 첫돌, 그 특별한 날</h2>
+      <div class="section__ornament" aria-hidden="true">✳</div>
+      <div class="date-card">
+        <div class="date-card__month" id="date-month">2026. 12</div>
+        <div class="date-card__day" id="date-day">13</div>
+        <div class="date-card__weekday" id="date-weekday">SUNDAY</div>
+        <div class="date-card__divider"></div>
+        <time class="date-card__time" id="event-time" datetime="2026-12-13T13:00:00+09:00">2026년 12월 13일 (일) 오후 1시</time>
+        <p class="date-card__note">소중한 만남을 기다릴게요.</p>
+      </div>
+    </section>
+
+    <!-- 04. 사진 모음 -->
+    <section class="section gallery" aria-labelledby="gallery-title">
+      <p class="eyebrow">GROWING WITH LOVE</p>
+      <h2 class="section__heading" id="gallery-title">서후의 작은 순간들</h2>
+      <p class="section__description">사랑을 가득 담아 자라온 서후의 하루하루</p>
+      <div class="gallery__grid" id="gallery-grid">
+        <!-- 아래 JavaScript의 photos.gallery 목록으로 생성됩니다. -->
+      </div>
+      <p class="gallery__hint">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 8V4h4M21 8V4h-4M3 16v4h4M21 16v4h-4"/></svg>
+        사진을 누르면 크게 볼 수 있어요.
+      </p>
+    </section>
+
+    <!-- 05. 장소 / 네이버 지도 -->
+    <section class="section section--tint" aria-labelledby="where-title">
+      <p class="eyebrow">LOCATION</p>
+      <h2 class="section__heading" id="where-title">오시는 길</h2>
+      <p class="section__description">함께해 주실 발걸음을 기다립니다.</p>
+      <div class="venue-card">
+        <div class="venue-card__symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.55"><path d="M20 10c0 5.5-8 11-8 11S4 15.5 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <h3 class="venue-card__name" id="venue-name">돌잔치 장소를 입력해 주세요</h3>
+        <p class="venue-card__hall" id="venue-hall">홀 / 층 정보</p>
+        <p class="venue-card__address" id="venue-address">주소를 입력해 주세요</p>
+        <a class="button button--naver" id="naver-link" href="https://map.naver.com/" target="_blank" rel="noopener noreferrer" aria-label="네이버 지도에서 장소 확인">
+          <strong aria-hidden="true">N</strong> 네이버 지도에서 보기
+        </a>
+        <button class="button button--subtle" type="button" id="copy-address">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+          주소 복사하기
+        </button>
+        <p class="venue-card__note">네이버 지도를 열어 위치와 길찾기를 확인할 수 있습니다.</p>
+      </div>
+    </section>
+
+    <!-- 06. 계좌 정보 -->
+    <section class="section accounts" aria-labelledby="account-title">
+      <p class="eyebrow">WITH GRATITUDE</p>
+      <h2 class="section__heading" id="account-title">마음 전하실 곳</h2>
+      <p class="section__description">멀리서도 서후의 첫 생일을 축하해 주시는<br>따뜻한 마음에 감사드립니다.</p>
+      <details class="accounts__details">
+        <summary>
+          <span>계좌번호 확인하기</span>
+          <svg class="accounts__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <div class="accounts__body" id="account-list"></div>
+      </details>
+      <p class="accounts__note">축하해 주시는 마음만으로도 큰 선물입니다.</p>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__flower" aria-hidden="true">✳</div>
+      <p class="footer__title">서후의 첫 번째 생일,<br>함께해 주셔서 고맙습니다.</p>
+      <p class="footer__sub">2026. 12. 13 · SEOHOO'S 1ST BIRTHDAY</p>
+      <button class="share-button" id="share-button" type="button">초대장 공유하기 ↗</button>
+      <div class="footer__bottom">MADE WITH LOVE FOR SEOHOO</div>
+    </footer>
+  </main>
+
+  <!-- 사진 확대 보기 -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기" aria-hidden="true">
+    <button class="lightbox__close" id="lightbox-close" type="button" aria-label="사진 닫기">×</button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lightbox-prev" type="button" aria-label="이전 사진">‹</button>
+    <img class="lightbox__image" id="lightbox-image" alt="서후의 사진">
+    <button class="lightbox__arrow lightbox__arrow--next" id="lightbox-next" type="button" aria-label="다음 사진">›</button>
+    <span class="lightbox__counter" id="lightbox-counter"></span>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // ==============================================================
+    // ★ 여기에 초대장 정보를 입력하세요! (사진, 장소, 계좌번호)
+    // --------------------------------------------------------------
+    // 사진 파일은 index.html과 같은 폴더의 images/ 폴더에 넣어주세요.
+    // 사진을 아직 넣지 않아도 예쁜 기본 배경이 표시됩니다.
+    // ============================================================== 
+    const INVITATION = {
+      babyName: '정서후',
+      eventDate: '2026-12-13T13:00:00+09:00',
+      photos: {
+        main: 'images/main.jpg',
+        gallery: [
+          'images/01.jpg',
+          'images/02.jpg',
+          'images/03.jpg',
+          'images/04.jpg'
+        ]
+      },
+      venue: {
+        name: '',       // 예: '○○호텔'
+        hall: '',       // 예: '3층 로즈홀'
+        address: '',    // 예: '서울특별시 ○○구 ○○로 123'
+        naverMapUrl: '' // 네이버 지도의 '공유' 링크를 붙여넣으면 가장 정확합니다.
+      },
+      accounts: [
+        { label: '아빠', bank: '', number: '', holder: '' },
+        { label: '엄마', bank: '', number: '', holder: '' }
+      ]
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const koreanDays = ['일', '월', '화', '수', '목', '금', '토'];
+    const englishDays = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+    let toastTimeout;
+
+    function showToast(message) {
+      const toast = $('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('show'), 2300);
+    }
+
+    async function copyText(text, successMessage = '복사되었습니다.') {
+      if (!text) { showToast('정보가 아직 등록되지 않았습니다.'); return; }
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          if (!document.execCommand('copy')) throw new Error('copy failed');
+          textarea.remove();
+        }
+        showToast(successMessage);
+      } catch {
+        showToast('복사할 수 없습니다. 내용을 직접 선택해 주세요.');
+      }
+    }
+
+    function loadImage(src, onSuccess) {
+      if (!src) return;
+      const probe = new Image();
+      probe.onload = () => onSuccess(src);
+      probe.onerror = () => {};
+      probe.src = src;
+    }
+
+    // 일시는 +09:00 기준으로 지정되어 있습니다.
+    const eventDate = new Date(INVITATION.eventDate);
+    if (!Number.isNaN(eventDate.getTime())) {
+      const parts = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Seoul', year: 'numeric', month: 'numeric', day: 'numeric',
+        weekday: 'short', hour: 'numeric', minute: 'numeric', hourCycle: 'h23'
+      }).formatToParts(eventDate).map(p => [p.type, p.value]));
+      const year = Number(parts.year);
+      const month = Number(parts.month);
+      const day = Number(parts.day);
+      const hour = Number(parts.hour);
+      const minute = Number(parts.minute);
+      const weekIndex = new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+      const ampm = hour < 12 ? '오전' : '오후';
+      const hour12 = hour % 12 || 12;
+      const timeLabel = `${year}년 ${month}월 ${day}일 (${koreanDays[weekIndex]}) ${ampm} ${hour12}시${minute ? ` ${minute}분` : ''}`;
+      $('date-month').textContent = `${year}. ${String(month).padStart(2, '0')}`;
+      $('date-day').textContent = String(day).padStart(2, '0');
+      $('date-weekday').textContent = englishDays[weekIndex];
+      $('event-time').textContent = timeLabel;
+      $('event-time').dateTime = INVITATION.eventDate;
+      document.querySelector('.footer__sub').textContent = `${year}. ${String(month).padStart(2, '0')}. ${String(day).padStart(2, '0')} · SEOHOO'S 1ST BIRTHDAY`;
+    }
+
+    document.title = `${INVITATION.babyName} 첫돌 초대장`;
+    $('intro-name').textContent = INVITATION.babyName;
+    $('cover-image').alt = `${INVITATION.babyName} 아기의 대표 사진`;
+    loadImage(INVITATION.photos.main, (src) => {
+      $('cover-image').src = src;
+      $('cover').classList.add('has-image');
+    });
+
+    // 사진 갤러리: 파일이 존재할 때만 사진 확대 기능을 활성화합니다.
+    const activePhotos = [];
+    const galleryGrid = $('gallery-grid');
+    INVITATION.photos.gallery.forEach((src, index) => {
+      const card = document.createElement('button');
+      card.className = 'photo-card';
+      card.type = 'button';
+      card.setAttribute('aria-label', `${INVITATION.babyName} 사진 ${index + 1}`);
+      const placeholder = document.createElement('div');
+      placeholder.className = 'photo-card__placeholder';
+      const number = document.createElement('span');
+      number.textContent = String(index + 1).padStart(2, '0');
+      const note = document.createElement('small');
+      note.textContent = 'PHOTO';
+      placeholder.append(number, note);
+      const img = document.createElement('img');
+      img.alt = `${INVITATION.babyName}의 성장 사진 ${index + 1}`;
+      img.loading = 'lazy';
+      card.append(placeholder, img);
+      galleryGrid.appendChild(card);
+      loadImage(src, () => {
+        img.src = src;
+        card.classList.add('has-image');
+        activePhotos.push({ src, index });
+      });
+      card.addEventListener('click', () => {
+        const photoIndex = activePhotos.findIndex(p => p.index === index);
+        if (photoIndex < 0) { showToast('이 자리에 사진을 넣어주세요.'); return; }
+        openLightbox(photoIndex);
+      });
+    });
+
+    // 사진 로딩 순서가 달라도 원래 설정된 순서대로 보여주기
+    let lightboxIndex = 0;
+    let previouslyFocused = null;
+    function orderedPhotos() { return [...activePhotos].sort((a, b) => a.index - b.index); }
+    function updateLightbox() {
+      const photos = orderedPhotos();
+      if (!photos.length) return;
+      lightboxIndex = (lightboxIndex + photos.length) % photos.length;
+      $('lightbox-image').src = photos[lightboxIndex].src;
+      $('lightbox-counter').textContent = `${lightboxIndex + 1} / ${photos.length}`;
+      $('lightbox-prev').hidden = photos.length < 2;
+      $('lightbox-next').hidden = photos.length < 2;
+    }
+    function openLightbox(index) {
+      const photos = orderedPhotos();
+      const selected = activePhotos[index];
+      lightboxIndex = Math.max(0, photos.findIndex(p => p.index === selected?.index));
+      previouslyFocused = document.activeElement;
+      $('lightbox').setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      updateLightbox();
+      $('lightbox-close').focus();
+    }
+    function closeLightbox() {
+      $('lightbox').setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      $('lightbox-image').removeAttribute('src');
+      previouslyFocused?.focus();
+    }
+    $('lightbox-close').addEventListener('click', closeLightbox);
+    $('lightbox-prev').addEventListener('click', () => { lightboxIndex--; updateLightbox(); });
+    $('lightbox-next').addEventListener('click', () => { lightboxIndex++; updateLightbox(); });
+    $('lightbox').addEventListener('click', e => { if (e.target === $('lightbox')) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if ($('lightbox').getAttribute('aria-hidden') !== 'false') return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') { lightboxIndex--; updateLightbox(); }
+      if (e.key === 'ArrowRight') { lightboxIndex++; updateLightbox(); }
+      if (e.key === 'Tab') { e.preventDefault(); $('lightbox-close').focus(); }
+    });
+
+    // 네이버 지도: 실제 장소 정보가 있으면 해당 장소로 검색합니다.
+    const venue = INVITATION.venue;
+    $('venue-name').textContent = venue.name || '돌잔치 장소를 입력해 주세요';
+    $('venue-hall').textContent = venue.hall || '홀 / 층 정보를 입력해 주세요';
+    $('venue-address').textContent = venue.address || '주소를 입력해 주세요';
+    const searchText = venue.address || venue.name;
+    $('naver-link').href = venue.naverMapUrl || (searchText
+      ? `https://map.naver.com/p/search/${encodeURIComponent(searchText)}`
+      : 'https://map.naver.com/');
+    $('copy-address').addEventListener('click', () => copyText(venue.address, '주소를 복사했습니다.'));
+
+    // 계좌번호는 기본적으로 접혀 있으며, 번호가 있는 경우에만 복사할 수 있습니다.
+    const accountList = $('account-list');
+    INVITATION.accounts.forEach(item => {
+      const account = document.createElement('div');
+      account.className = 'account';
+      const label = document.createElement('p');
+      label.className = 'account__label';
+      label.textContent = item.label;
+      const line = document.createElement('div');
+      line.className = 'account__line';
+      const info = document.createElement('div');
+      const bank = document.createElement('div');
+      bank.className = 'account__bank';
+      bank.textContent = item.bank || '은행 정보를 입력해 주세요';
+      const number = document.createElement('div');
+      number.className = 'account__number';
+      number.textContent = item.number || '계좌번호를 입력해 주세요';
+      const holder = document.createElement('div');
+      holder.className = 'account__holder';
+      holder.textContent = item.holder ? `예금주 ${item.holder}` : '예금주 정보를 입력해 주세요';
+      info.append(bank, number, holder);
+      const copy = document.createElement('button');
+      copy.type = 'button';
+      copy.className = 'copy-button';
+      copy.textContent = '복사';
+      copy.disabled = !item.number;
+      copy.setAttribute('aria-label', `${item.label} 계좌번호 복사`);
+      copy.addEventListener('click', () => copyText(item.number, '계좌번호를 복사했습니다.'));
+      line.append(info, copy);
+      account.append(label, line);
+      accountList.appendChild(account);
+    });
+
+    // 공유 기능: https로 배포하면 휴대폰의 공유 메뉴를 이용할 수 있습니다.
+    $('share-button').addEventListener('click', async () => {
+      if (location.protocol === 'file:') {
+        showToast('초대장을 웹사이트에 올린 뒤 공유해 주세요.');
+        return;
+      }
+      const data = { title: document.title, text: `${INVITATION.babyName} 첫돌에 초대합니다.`, url: location.href };
+      if (navigator.share) {
+        try { await navigator.share(data); } catch (error) { if (error.name !== 'AbortError') copyText(location.href, '초대장 링크를 복사했습니다.'); }
+      } else {
+        copyText(location.href, '초대장 링크를 복사했습니다.');
+      }
+    });
+  </script>
+</body>
+</html>
