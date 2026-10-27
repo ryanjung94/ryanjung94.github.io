@@ -8,9 +8,11 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="정서후의 첫 번째 생일에 초대합니다">
   <meta property="og:description" content="2026년 12월 13일 일요일 오후 1시, 함께 축하해 주세요.">
-  <meta property="og:image" content="https://ryanjung94.github.io/assets/seohoo/images/main.jpg">
-  <!-- 실제 웹사이트에 게시할 경우, 공유 미리보기 사진을 절대 URL로 입력하세요.
-       예: <meta property="og:image" content="https://example.com/images/main.jpg"> -->
+  <meta property="og:url" content="https://ryanjung94.github.io/seohoofbd">
+  <!-- 카카오톡 미리보기용 가로 이미지(1200x630). 사진을 바꾸면 카톡 캐시 초기화가 필요할 수 있어요. -->
+  <meta property="og:image" content="https://ryanjung94.github.io/assets/seohoo/images/web/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <title>정서후 첫돌 초대장</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +23,7 @@
       --cream: #f8f5ef;
       --paper: #fffcf8;
       --ink: #493f37;
-      --muted: #8d8177;
+      --muted: #74685e;
       --line: #e8dfd4;
       --accent: #b88472;
       --accent-dark: #9b6856;
@@ -54,10 +56,15 @@
     .eyebrow {
       margin: 0;
       color: var(--accent-dark);
-      font-size: 11px;
+      font-size: 12px;
       letter-spacing: .24em;
       font-weight: 600;
     }
+    /* 손그림 느낌의 장식 아이콘 (하단 SVG 스프라이트 사용) */
+    .ornament { display:inline-block; width:22px; height:22px; color:var(--accent); vertical-align:middle; }
+    /* 스크롤 시 부드럽게 나타나기: JS가 동작할 때만 숨김 처리 */
+    .js .reveal { opacity:0; transform:translateY(18px); transition:opacity .8s ease, transform .8s ease; }
+    .js .reveal.is-visible { opacity:1; transform:none; }
     .site-heading {
       padding: 27px 26px 23px;
       display: flex;
@@ -66,7 +73,7 @@
     }
     .brand { font: 700 16px var(--font-serif); letter-spacing: .05em; }
     .brand .little { color: var(--accent); }
-    .site-heading__right { color: var(--muted); font-size: 10px; letter-spacing: .12em; }
+    .site-heading__right { color: var(--muted); font-size: 11px; letter-spacing: .12em; }
     .cover {
       position: relative;
       margin: 0 20px;
@@ -125,7 +132,9 @@
       inset: 0;
       z-index: 1;
       width: 100%; height: 100%; object-fit: cover;
+      animation: fade-in 1.2s ease both;
     }
+    @keyframes fade-in { from { opacity: 0; transform: scale(1.03); } to { opacity: 1; transform: none; } }
     .cover.has-image .cover__image { display: block; }
     .cover.has-image .cover__fallback { display: none; }
     .cover__ribbon {
@@ -135,25 +144,30 @@
       color: white;
       text-align: center;
       letter-spacing: .21em;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
       text-shadow: 0 2px 5px rgba(0,0,0,.17);
     }
-    .intro { text-align: center; padding: 41px 26px 69px; }
-    .intro__star { color: var(--accent); font-size: 20px; line-height: 1; margin-bottom: 18px; }
+    .intro { text-align: center; padding: 44px 26px 72px; }
+    .intro__star { margin-bottom: 16px; }
+    .intro__star .ornament { width: 34px; height: 34px; }
     h1, h2, p { margin-top: 0; }
     .intro h1 { margin: 10px 0 12px; font: 700 40px var(--font-serif); letter-spacing: .045em; }
-    .intro__subtitle { margin: 0; color: var(--muted); font-size: 13px; letter-spacing: .04em; }
-    .intro__title { font: 400 24px/1.65 var(--font-serif); margin: 37px 0 14px; }
-    .intro__message { font-size: 13px; line-height: 2.15; color: #776d63; margin: 0; }
+    .intro__subtitle { margin: 0; color: var(--muted); font-size: 14px; letter-spacing: .04em; }
+    .intro__parents { margin: 18px 0 0; font: 400 15px/1.7 var(--font-serif); color: var(--ink); }
+    .intro__parents b { font-weight: 700; }
+    .intro__parents .dot { color: var(--accent); margin: 0 7px; }
+    .intro__title { font: 400 24px/1.65 var(--font-serif); margin: 37px 0 16px; }
+    .intro__message { font-size: clamp(13.5px, 3.9vw, 15px); line-height: 2.05; color: #62584f; margin: 0; }
     .section { padding: 66px 28px; text-align: center; }
     .section--tint { background: var(--cream); }
     .section__heading { margin: 10px 0 11px; font: 400 26px/1.5 var(--font-serif); }
-    .section__description { color: var(--muted); font-size: 12px; line-height: 1.9; margin-bottom: 32px; }
-    .section__ornament { display: flex; gap: 10px; align-items: center; justify-content: center; margin: 0 0 28px; color: var(--accent); }
+    .section__description { color: var(--muted); font-size: 14px; line-height: 1.85; margin-bottom: 32px; }
+    .section__ornament { display: flex; gap: 12px; align-items: center; justify-content: center; margin: 0 0 28px; color: var(--accent); }
     .section__ornament::before, .section__ornament::after { content: ""; height: 1px; width: 39px; background: var(--line); }
+    .section__ornament .ornament { width: 18px; height: 18px; }
     .date-card { border: 1px solid #e4d9ce; background: rgba(255,255,255,.58); padding: 29px 18px 30px; border-radius: 6px; }
-    .date-card__month { font-family: var(--font-serif); font-size: 14px; color: #8c7867; letter-spacing: .14em; }
+    .date-card__month { font-family: var(--font-serif); font-size: 15px; color: #7a6656; letter-spacing: .14em; }
     /* SAVE THE DATE: 반응형 월간 달력 */
     .date-card__calendar { width: 100%; max-width: 298px; margin: 22px auto 3px; }
     .date-card__weekdays, .date-card__days {
@@ -163,7 +177,7 @@
     }
     .date-card__weekdays { margin-bottom: 11px; }
     .date-card__weekday-label {
-      font-size: 10px; color: #8c7867; font-weight: 600;
+      font-size: 12px; color: #7a6656; font-weight: 600;
       line-height: 26px; letter-spacing: .02em;
     }
     .date-card__weekday-label:first-child { color: var(--accent-dark); }
@@ -173,20 +187,39 @@
       margin-inline: auto;
       border: 2px solid transparent;
       border-radius: 50%;
-      font: 400 13px/1 var(--font-serif);
+      font: 400 14px/1 var(--font-serif);
       color: var(--ink);
     }
     .date-card__date--sun { color: var(--accent-dark); }
     .date-card__date--event {
+      position: relative;
       border-color: var(--accent-dark);
-      background: #f8ebe4;
-      color: var(--accent-dark);
+      background: var(--accent-dark);
+      color: #fff;
       font-weight: 700;
+      box-shadow: 0 4px 12px rgba(155, 104, 86, .28);
+    }
+    /* 돌잔치 날짜 위의 작은 하트 */
+    .date-card__date--event::after {
+      content: "";
+      position: absolute;
+      top: -7px; right: -5px;
+      width: 13px; height: 13px;
+      background: var(--accent);
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.2 0 3.6 1.2 5.3 3.1 1.7-1.9 3.1-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21Z'/%3E%3C/svg%3E") center / contain no-repeat;
+              mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.2 0 3.6 1.2 5.3 3.1 1.7-1.9 3.1-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21Z'/%3E%3C/svg%3E") center / contain no-repeat;
     }
     .date-card__date--empty { visibility: hidden; }
     .date-card__divider { height: 1px; background: #e7ded5; margin: 25px auto 21px; width: 62%; }
-    .date-card__time { font-size: 15px; font-weight: 600; }
-    .date-card__note { margin: 7px 0 0; font-size: 11px; color: var(--muted); }
+    .date-card__time { font-size: 17px; font-weight: 600; }
+    .date-card__note { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+    /* D-day 카운트다운 */
+    .dday { margin: 26px auto 0; display: flex; justify-content: center; gap: 8px; }
+    .dday__unit { min-width: 62px; padding: 12px 6px 10px; border-radius: 8px; background: #fff; border: 1px solid var(--line); }
+    .dday__num { display: block; font: 700 24px/1 var(--font-serif); color: var(--accent-dark); font-variant-numeric: tabular-nums; }
+    .dday__label { display: block; margin-top: 7px; font-size: 11px; letter-spacing: .12em; color: var(--muted); }
+    .dday__message { margin: 16px 0 0; font: 400 15px/1.7 var(--font-serif); color: var(--ink); }
+    .dday__message b { color: var(--accent-dark); font-weight: 700; }
     .gallery { padding-left: 20px; padding-right: 20px; }
     .gallery__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .photo-card {
@@ -208,10 +241,11 @@
     .photo-card__placeholder span { font-size: 31px; font-weight:400; opacity:.65; }
     .photo-card__placeholder small { font-size: 11px; margin-top: 8px; }
     .photo-card img { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; }
-    .photo-card.has-image img { display:block; }
+    .photo-card.has-image img { display:block; animation: photo-in .7s ease both; }
+    @keyframes photo-in { from { opacity:0; } to { opacity:1; } }
     .photo-card.has-image .photo-card__placeholder { display:none; }
     @media (hover:hover) { .photo-card.has-image:hover img { transform:scale(1.045); } }
-    .gallery__hint { display:flex; justify-content:center; gap:7px; align-items:center; margin-top:19px; color:var(--muted); font-size:11px; }
+    .gallery__hint { display:flex; justify-content:center; gap:7px; align-items:center; margin-top:19px; color:var(--muted); font-size:13px; }
     .gallery__hint svg { width:14px; height:14px; }
     .venue-card { background:#fff; padding:30px 22px 24px; border:1px solid var(--line); border-radius:6px; }
     .venue-card__symbol { display:grid; place-items:center; margin:0 auto 17px; width:64px; height:64px; border-radius:50%; background:#f3eae2; color:var(--accent-dark); }
@@ -228,42 +262,43 @@
     .venue-card__map-canvas { opacity:0; pointer-events:none; }
     .venue-card__map.is-naver-ready .venue-card__map-canvas { opacity:1; pointer-events:auto; }
     .venue-card__map.is-naver-ready iframe { visibility:hidden; }
-    .venue-card__map-caption { font-size:11px; color:var(--muted); line-height:1.7; margin:-9px 0 19px; }
+    .venue-card__map-caption { font-size:12px; color:var(--muted); line-height:1.7; margin:-9px 0 19px; }
     #map-fallback {
       pointer-events: none;
     }
-    .venue-card__name { font:700 20px/1.5 var(--font-serif); margin:0 0 8px; }
-    .venue-card__hall { font-size:12px; color:#88786c; margin:0 0 16px; }
-    .venue-card__address { font-size:13px; color:#665d56; line-height:1.75; margin:0 0 23px; }
-    .button { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; min-height:51px; border-radius:4px; text-decoration:none; font-size:13px; font-weight:600; border:1px solid transparent; cursor:pointer; transition:filter .2s ease; }
+    .venue-card__name { font:700 21px/1.5 var(--font-serif); margin:0 0 8px; }
+    .venue-card__hall { font-size:14px; color:var(--muted); margin:0 0 14px; }
+    .venue-card__address { font-size:15px; color:#5b524b; line-height:1.75; margin:0 0 23px; }
+    .button { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; min-height:52px; border-radius:4px; text-decoration:none; font-size:15px; font-weight:600; border:1px solid transparent; cursor:pointer; transition:filter .2s ease; }
     .button:hover { filter:brightness(.97); }
     .button--naver { background:#03c75a; color:white; }
     .button--naver strong { display:grid; place-items:center; width:20px; height:20px; background:white; color:#03c75a; border-radius:4px; font-size:14px; line-height:1; font-family:Arial, sans-serif; }
     .button--subtle { border-color:#e2d9d0; color:var(--ink); background:#fff; margin-top:9px; }
     .button svg { width:17px; height:17px; }
-    .venue-card__note { margin:18px 0 0; font-size:11px; line-height:1.8; color:var(--muted); }
+    .venue-card__note { margin:18px 0 0; font-size:13px; line-height:1.8; color:var(--muted); }
     .accounts__details { text-align:left; border:1px solid var(--line); border-radius:6px; background:white; overflow:hidden; }
-    .accounts__details summary { display:flex; align-items:center; justify-content:space-between; padding:20px; cursor:pointer; font-size:14px; font-weight:600; list-style:none; }
+    .accounts__details summary { display:flex; align-items:center; justify-content:space-between; padding:20px; cursor:pointer; font-size:15px; font-weight:600; list-style:none; }
     .accounts__details summary::-webkit-details-marker { display:none; }
     .accounts__chevron { width:18px; height:18px; color:var(--accent); transition:transform .2s ease; }
     .accounts__details[open] .accounts__chevron { transform:rotate(180deg); }
     .accounts__body { padding:1px 20px 17px; border-top:1px solid #f0e9e2; }
     .account { padding:19px 0 13px; }
     .account + .account { border-top:1px solid #f0e9e2; }
-    .account__label { color:var(--accent-dark); font-size:12px; margin:0 0 10px; font-weight:600; }
-    .account__bank { color:var(--ink); font-size:14px; font-weight:600; }
-    .account__holder { color:var(--muted); font-size:11px; margin-top:6px; }
+    .account__label { color:var(--accent-dark); font-size:13px; margin:0 0 10px; font-weight:600; }
+    .account__bank { color:var(--ink); font-size:15px; font-weight:600; }
+    .account__holder { color:var(--muted); font-size:13px; margin-top:6px; }
     .account__line { display:flex; justify-content:space-between; gap:10px; align-items:center; }
-    .account__number { font-size:12px; color:#645c54; word-break:break-all; margin-top:5px; }
-    .copy-button { border:1px solid #e6ddd4; background:#faf8f5; border-radius:4px; padding:9px 12px; font-size:11px; color:#685b4e; flex:0 0 auto; cursor:pointer; }
+    .account__number { font-size:15px; color:#4f4740; word-break:break-all; margin-top:5px; letter-spacing:.02em; font-variant-numeric:tabular-nums; }
+    .copy-button { border:1px solid #e6ddd4; background:#faf8f5; border-radius:4px; padding:10px 14px; font-size:13px; color:#5f5348; flex:0 0 auto; cursor:pointer; }
     .copy-button:disabled { opacity:.45; cursor:not-allowed; }
-    .accounts__note { margin:15px 0 0; font-size:11px; color:var(--muted); line-height:1.9; }
+    .accounts__note { margin:15px 0 0; font-size:13px; color:var(--muted); line-height:1.9; }
     .footer { padding:61px 24px 49px; text-align:center; background:#f0e8df; }
-    .footer__flower { font-size:30px; color:var(--accent); margin-bottom:16px; }
+    .footer__flower { margin-bottom:16px; }
+    .footer__flower .ornament { width:32px; height:32px; }
     .footer__title { font:400 20px/1.7 var(--font-serif); margin:0 0 13px; }
-    .footer__sub { color:#897a6e; font-size:12px; margin:0 0 28px; }
-    .footer__bottom { font-size:11px; letter-spacing:.18em; color:#b39f91; }
-    .share-button { border:1px solid #cdbdaf; background:transparent; color:#63574d; padding:12px 20px; border-radius:100px; cursor:pointer; font-size:12px; margin-bottom:40px; }
+    .footer__sub { color:var(--muted); font-size:13px; margin:0 0 28px; }
+    .footer__bottom { font-size:11px; letter-spacing:.18em; color:#9a8576; }
+    .share-button { border:1px solid #cdbdaf; background:transparent; color:#5a4f46; padding:13px 22px; border-radius:100px; cursor:pointer; font-size:14px; margin-bottom:40px; }
     .lightbox { position:fixed; inset:0; background:rgba(24,20,18,.94); z-index:1000; display:none; align-items:center; justify-content:center; padding:70px 14px; }
     .lightbox[aria-hidden="false"] { display:flex; }
     .lightbox__image { display:block; max-width:100%; max-height:78vh; object-fit:contain; }
@@ -272,14 +307,42 @@
     .lightbox__arrow { width:44px; height:44px; top:50%; transform:translateY(-50%); font-size:30px; }
     .lightbox__arrow--prev { left:12px; } .lightbox__arrow--next { right:12px; }
     .lightbox__counter { position:absolute; bottom:25px; color:#fff; opacity:.8; font-size:12px; letter-spacing:.15em; }
-    .toast { position:fixed; bottom:25px; left:50%; transform:translate(-50%,10px); max-width:min(90vw,400px); padding:12px 18px; border-radius:9px; background:#493f37; color:#fff; font-size:12px; box-shadow:0 9px 25px rgba(0,0,0,.15); opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; z-index:2000; white-space:nowrap; }
+    .toast { position:fixed; bottom:25px; left:50%; transform:translate(-50%,10px); max-width:min(90vw,400px); padding:12px 18px; border-radius:9px; background:#493f37; color:#fff; font-size:14px; box-shadow:0 9px 25px rgba(0,0,0,.15); opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; z-index:2000; white-space:nowrap; }
     .toast.show { opacity:1; transform:translate(-50%,0); }
     @media (max-width:380px) { .intro__title { font-size:21px; } .section { padding:57px 20px; } .cover { margin:0 13px; } .site-heading { padding-left:20px; padding-right:20px; } .gallery { padding-left:13px; padding-right:13px; } }
     @media (min-width:600px) { body { padding:42px 0; } .page { border-radius:8px; } }
-    @media (prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; } }
+    @media (prefers-reduced-motion:reduce) {
+      *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; }
+      .js .reveal { opacity:1; transform:none; }
+    }
   </style>
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+  <!-- 장식 아이콘 모음: <svg class="ornament"><use href="#…"/></svg> 로 사용 -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <!-- 첫돌 촛불: 숫자 1 모양 초 -->
+    <symbol id="i-candle" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 3.2c1.9 2.1 2.6 3.7 2.6 5 0 1.5-1.2 2.6-2.6 2.6s-2.6-1.1-2.6-2.6c0-1.3.7-2.9 2.6-5Z" fill="currentColor" fill-opacity=".22"/>
+      <path d="M16 10.8v2.4"/>
+      <path d="M13.2 17.2 16.8 14v14"/>
+      <path d="M13.4 28h7"/>
+      <path d="M6.5 9.5l1.6 1.6M25.5 9.5l-1.6 1.6M5 16h2.2M27 16h-2.2"/>
+    </symbol>
+    <!-- 반짝이는 별 -->
+    <symbol id="i-sparkle" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.5c.5 4.6 2.4 6.9 7.5 7.5-5.1.6-7 2.9-7.5 7.5-.5-4.6-2.4-6.9-7.5-7.5 5.1-.6 7-2.9 7.5-7.5Z"/>
+      <path d="M19 15.5c.2 1.8.9 2.6 2.5 2.8-1.6.2-2.3 1-2.5 2.7-.2-1.7-.9-2.5-2.5-2.7 1.6-.2 2.3-1 2.5-2.8Z" opacity=".6"/>
+    </symbol>
+    <!-- 풍선 두 개 -->
+    <symbol id="i-balloon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3.5c3.6 0 6 2.9 6 6.4 0 4.1-3.2 7.6-6 7.6s-6-3.5-6-7.6c0-3.5 2.4-6.4 6-6.4Z" fill="currentColor" fill-opacity=".18"/>
+      <path d="M21.5 8c2.8 0 4.7 2.3 4.7 5 0 3.2-2.5 5.9-4.7 5.9" fill="none"/>
+      <path d="M11 17.5h2l-1 1.4Z" fill="currentColor"/>
+      <path d="M12 18.9c-1.2 2.6 1.4 4.3 0 6.6-.8 1.3-.2 2.6.6 3.4"/>
+      <path d="M21.5 18.9c1 2.2-1.2 3.9 0 5.9"/>
+    </symbol>
+  </svg>
   <main class="page">
     <header class="site-heading">
       <div class="brand">Seohoo<span class="little">.</span></div>
@@ -292,25 +355,26 @@
       <span class="cover__shape cover__shape--small" aria-hidden="true"></span>
       <div class="cover__fallback" aria-hidden="true"><strong>ONE</strong><small>OUR LITTLE SUNSHINE</small></div>
       <img class="cover__image" id="cover-image" alt="정서후 아기의 대표 사진">
-      <figcaption class="cover__ribbon">SEOHOO · FIRST BIRTHDAY</figcaption>
+      <figcaption class="cover__ribbon" id="cover-ribbon">2026. 12. 13 SUN</figcaption>
     </figure>
 
     <!-- 02. 아기 이름 / 초대 문구 -->
     <section class="intro" aria-labelledby="intro-name">
-      <div class="intro__star" aria-hidden="true">✳</div>
-      <p class="eyebrow">HAPPY FIRST BIRTHDAY</p>
-      <h1 id="intro-name">정서후</h1>
-      <p class="intro__subtitle">우리 아기의 첫 번째 생일</p>
-      <h2 class="intro__title">첫 번째 생일에<br>소중한 분들을 초대합니다.</h2>
-      <p class="intro__message">작고 소중한 서후가 어느덧 첫돌을 맞이합니다.<br>따뜻한 사랑으로 지켜봐 주신 분들과<br>기쁜 순간을 함께 나누고 싶습니다.<br>귀한 걸음 하시어 축복해 주시면 감사하겠습니다.</p>
+      <div class="intro__star reveal" aria-hidden="true"><svg class="ornament"><use href="#i-candle"/></svg></div>
+      <p class="eyebrow reveal">HAPPY FIRST BIRTHDAY</p>
+      <h1 id="intro-name" class="reveal">정서후</h1>
+      <p class="intro__subtitle reveal">우리 아기의 첫 번째 생일</p>
+      <p class="intro__parents reveal" id="intro-parents"></p>
+      <h2 class="intro__title reveal">첫 번째 생일에<br>소중한 분들을 초대합니다.</h2>
+      <p class="intro__message reveal">작고 소중한 서후가 어느덧 첫돌을 맞이합니다.<br>따뜻한 사랑으로 지켜봐 주신 분들과<br>기쁜 순간을 함께 나누고 싶습니다.<br>귀한 걸음 하시어 축복해 주시면 감사하겠습니다.</p>
     </section>
 
     <!-- 03. 행사 일시 -->
     <section class="section section--tint" aria-labelledby="when-title">
-      <p class="eyebrow">SAVE THE DATE</p>
-      <h2 class="section__heading" id="when-title">서후의 첫돌, 그 특별한 날</h2>
-      <div class="section__ornament" aria-hidden="true">✳</div>
-      <div class="date-card">
+      <p class="eyebrow reveal">SAVE THE DATE</p>
+      <h2 class="section__heading reveal" id="when-title">서후의 첫돌, 그 특별한 날</h2>
+      <div class="section__ornament reveal" aria-hidden="true"><svg class="ornament"><use href="#i-sparkle"/></svg></div>
+      <div class="date-card reveal">
         <div class="date-card__month" id="date-month">2026. 12</div>
         <div class="date-card__calendar" id="event-calendar" role="group" aria-label="2026년 12월 달력">
           <div class="date-card__weekdays" aria-hidden="true">
@@ -327,15 +391,18 @@
         <div class="date-card__divider"></div>
         <time class="date-card__time" id="event-time" datetime="2026-12-13T13:00:00+09:00">2026년 12월 13일 (일) 오후 1시</time>
         <p class="date-card__note">소중한 만남을 기다릴게요.</p>
+        <!-- D-day: 아래 JavaScript가 날짜에 맞춰 채웁니다. -->
+        <div class="dday" id="dday" hidden></div>
+        <p class="dday__message" id="dday-message" hidden></p>
       </div>
     </section>
 
     <!-- 04. 사진 모음 -->
     <section class="section gallery" aria-labelledby="gallery-title">
-      <p class="eyebrow">GROWING WITH LOVE</p>
-      <h2 class="section__heading" id="gallery-title">서후의 작은 순간들</h2>
-      <p class="section__description">사랑을 가득 담아 자라온 서후의 하루하루</p>
-      <div class="gallery__grid" id="gallery-grid">
+      <p class="eyebrow reveal">GROWING WITH LOVE</p>
+      <h2 class="section__heading reveal" id="gallery-title">서후의 작은 순간들</h2>
+      <p class="section__description reveal">사랑을 가득 담아 자라온 서후의 하루하루</p>
+      <div class="gallery__grid reveal" id="gallery-grid">
         <!-- 아래 JavaScript의 photos.gallery 목록으로 생성됩니다. -->
       </div>
       <p class="gallery__hint">
@@ -346,10 +413,10 @@
 
     <!-- 05. 장소 / 네이버 지도 -->
     <section class="section section--tint" aria-labelledby="where-title">
-      <p class="eyebrow">LOCATION</p>
-      <h2 class="section__heading" id="where-title">오시는 길</h2>
-      <p class="section__description">함께해 주실 발걸음을 기다립니다.</p>
-      <div class="venue-card">
+      <p class="eyebrow reveal">LOCATION</p>
+      <h2 class="section__heading reveal" id="where-title">오시는 길</h2>
+      <p class="section__description reveal">함께해 주실 발걸음을 기다립니다.</p>
+      <div class="venue-card reveal">
         <div class="venue-card__symbol" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.55"><path d="M20 10c0 5.5-8 11-8 11S4 15.5 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
         <!-- 네이버 지도 API Client ID가 없을 때에는 핀 표시된 OSM 미리보기를 보여줍니다. -->
         <div class="venue-card__map" id="venue-map" aria-label="돌잔치 장소 지도">
@@ -373,10 +440,10 @@
 
     <!-- 06. 계좌 정보 -->
     <section class="section accounts" aria-labelledby="account-title">
-      <p class="eyebrow">WITH GRATITUDE</p>
-      <h2 class="section__heading" id="account-title">마음 전하실 곳</h2>
-      <p class="section__description">멀리서도 서후의 첫 생일을 축하해 주시는<br>따뜻한 마음에 감사드립니다.</p>
-      <details class="accounts__details">
+      <p class="eyebrow reveal">WITH GRATITUDE</p>
+      <h2 class="section__heading reveal" id="account-title">마음 전하실 곳</h2>
+      <p class="section__description reveal">멀리서도 서후의 첫 생일을 축하해 주시는<br>따뜻한 마음에 감사드립니다.</p>
+      <details class="accounts__details reveal">
         <summary>
           <span>계좌번호 확인하기</span>
           <svg class="accounts__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
@@ -387,8 +454,8 @@
     </section>
 
     <footer class="footer">
-      <div class="footer__flower" aria-hidden="true">✳</div>
-      <p class="footer__title">서후의 첫 번째 생일,<br>함께해 주셔서 고맙습니다.</p>
+      <div class="footer__flower reveal" aria-hidden="true"><svg class="ornament"><use href="#i-balloon"/></svg></div>
+      <p class="footer__title reveal">서후의 첫 번째 생일,<br>함께해 주셔서 고맙습니다.</p>
       <p class="footer__sub">2026. 12. 13 · SEOHOO'S 1ST BIRTHDAY</p>
       <button class="share-button" id="share-button" type="button">초대장 공유하기 ↗</button>
       <div class="footer__bottom">MADE WITH LOVE FOR SEOHOO</div>
@@ -414,14 +481,18 @@
     // ============================================================== 
     const INVITATION = {
       babyName: '정서후',
+      birthDate: '2025-12-13',
       eventDate: '2026-12-13T13:00:00+09:00',
+      parents: { father: '정주호', mother: '송정은' },
+      // 웹용으로 줄인 사진입니다. 원본은 assets/seohoo/images/ 에 그대로 있어요.
+      // '../assets/' 경로라서 PC에서 파일을 바로 열어도, 사이트(/seohoofbd)에서도 사진이 보입니다.
       photos: {
-        main: '/assets/seohoo/images/main.jpg',
+        main: '../assets/seohoo/images/web/main.jpg',
         gallery: [
-          '/assets/seohoo/images/01.jpg',
-          '/assets/seohoo/images/02.jpg',
-          '/assets/seohoo/images/03.jpg',
-          '/assets/seohoo/images/04.jpg'
+          '../assets/seohoo/images/web/01.jpg',
+          '../assets/seohoo/images/web/02.jpg',
+          '../assets/seohoo/images/web/03.jpg',
+          '../assets/seohoo/images/web/04.jpg'
         ]
       },
       venue: {
@@ -527,6 +598,94 @@
       $('event-time').textContent = timeLabel;
       $('event-time').dateTime = INVITATION.eventDate;
       document.querySelector('.footer__sub').textContent = `${year}. ${String(month).padStart(2, '0')}. ${String(day).padStart(2, '0')} · SEOHOO'S 1ST BIRTHDAY`;
+      $('cover-ribbon').textContent = `${year}. ${String(month).padStart(2, '0')}. ${String(day).padStart(2, '0')} ${englishDays[weekIndex].slice(0, 3)}`;
+      startCountdown(eventDate);
+    }
+
+    // D-day: 한국 시간 기준 날짜로 계산합니다.
+    function seoulDayNumber(date) {
+      const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Seoul', year: 'numeric', month: 'numeric', day: 'numeric'
+      }).formatToParts(date).map(x => [x.type, x.value]));
+      return Date.UTC(Number(p.year), Number(p.month) - 1, Number(p.day)) / 86400000;
+    }
+    function startCountdown(target) {
+      const box = $('dday');
+      const message = $('dday-message');
+      const name = INVITATION.babyName.slice(1);
+      const birth = new Date(`${INVITATION.birthDate}T00:00:00+09:00`);
+      const units = [['days', '일'], ['hours', '시간'], ['minutes', '분']].map(([key, label]) => {
+        const unit = document.createElement('div');
+        unit.className = 'dday__unit';
+        const num = document.createElement('span');
+        num.className = 'dday__num';
+        const text = document.createElement('span');
+        text.className = 'dday__label';
+        text.textContent = label;
+        unit.append(num, text);
+        box.appendChild(unit);
+        return [key, num];
+      });
+      const setMessage = (...parts) => {
+        // parts: 일반 문자열과 [강조 문자열] 배열을 섞어서 전달
+        message.replaceChildren(...parts.map(part => {
+          if (!Array.isArray(part)) return document.createTextNode(part);
+          const b = document.createElement('b');
+          b.textContent = part[0];
+          return b;
+        }));
+        message.hidden = false;
+      };
+      function tick() {
+        const now = new Date();
+        const daysLeft = seoulDayNumber(target) - seoulDayNumber(now);
+        if (daysLeft > 0) {
+          const ms = Math.max(0, target - now);
+          const values = {
+            days: Math.floor(ms / 86400000),
+            hours: Math.floor(ms / 3600000) % 24,
+            minutes: Math.floor(ms / 60000) % 60
+          };
+          units.forEach(([key, el]) => { el.textContent = String(values[key]); });
+          box.hidden = false;
+          if (!Number.isNaN(birth.getTime())) {
+            const lived = seoulDayNumber(now) - seoulDayNumber(birth) + 1;
+            setMessage(`${name}가 태어난 지 `, [`${lived}일째`], `, 첫돌까지 `, [`D-${daysLeft}`]);
+          } else {
+            setMessage(`${name}의 첫돌까지 `, [`D-${daysLeft}`]);
+          }
+          return true;
+        }
+        box.hidden = true;
+        if (daysLeft === 0) setMessage('오늘은 ', [`${name}의 첫 번째 생일`], '이에요!');
+        else setMessage('함께 축하해 주셔서 진심으로 고맙습니다.');
+        return false;
+      }
+      if (tick()) {
+        const timer = setInterval(() => { if (!tick()) clearInterval(timer); }, 30000);
+      }
+    }
+
+    const parents = INVITATION.parents;
+    if (parents && (parents.father || parents.mother)) {
+      const line = $('intro-parents');
+      const addName = (role, value) => {
+        const b = document.createElement('b');
+        b.textContent = value;
+        line.append(`${role} `, b);
+      };
+      if (parents.father) addName('아빠', parents.father);
+      if (parents.father && parents.mother) {
+        const dot = document.createElement('span');
+        dot.className = 'dot';
+        dot.setAttribute('aria-hidden', 'true');
+        dot.textContent = '·';
+        line.append(dot);
+      }
+      if (parents.mother) addName('엄마', parents.mother);
+      line.append('의 아들');
+    } else {
+      $('intro-parents').hidden = true;
     }
 
     document.title = `${INVITATION.babyName} 첫돌 초대장`;
@@ -723,6 +882,21 @@
         copyText(location.href, '초대장 링크를 복사했습니다.');
       }
     });
+
+    // 스크롤 시 섹션이 부드럽게 떠오르도록 합니다.
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+      revealItems.forEach(el => observer.observe(el));
+    } else {
+      revealItems.forEach(el => el.classList.add('is-visible'));
+    }
   </script>
 </body>
 </html>
