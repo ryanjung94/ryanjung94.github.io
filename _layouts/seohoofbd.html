@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f8f5ef">
+  <meta name="theme-color" content="#f6f3fa">
   <meta name="description" content="정서후의 첫 번째 생일에 소중한 분들을 초대합니다. 2026년 12월 13일 오후 1시">
   <meta property="og:type" content="website">
   <meta property="og:title" content="정서후의 첫 번째 생일에 초대합니다">
@@ -20,13 +20,13 @@
   <style>
     :root {
       color-scheme: light;
-      --cream: #f8f5ef;
-      --paper: #fffcf8;
-      --ink: #493f37;
-      --muted: #74685e;
-      --line: #e8dfd4;
-      --accent: #b88472;
-      --accent-dark: #9b6856;
+      --cream: #f6f3fa;
+      --paper: #fdfcff;
+      --ink: #433b4f;
+      --muted: #6c6479;
+      --line: #e4def0;
+      --accent: #9d86c4;
+      --accent-dark: #7a5fa8;
       --sage: #a5b19a;
       --font-serif: "Gowun Batang", "Nanum Myeongjo", Georgia, serif;
       --font-sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
@@ -35,7 +35,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: #eeebe6;
+      background: #ece9f2;
       color: var(--ink);
       font-family: var(--font-sans);
       -webkit-font-smoothing: antialiased;
@@ -50,7 +50,7 @@
       margin: 0 auto;
       min-height: 100vh;
       background: var(--paper);
-      box-shadow: 0 14px 60px rgba(53, 42, 30, .075);
+      box-shadow: 0 14px 60px rgba(48, 38, 70, .08);
       overflow: hidden;
     }
     .eyebrow {
@@ -79,7 +79,7 @@
       margin: 0 20px;
       aspect-ratio: 4 / 4.8;
       overflow: hidden;
-      background: linear-gradient(140deg, #e8d6cc 0%, #f5e6da 42%, #e2cbbb 100%);
+      background: linear-gradient(140deg, #e3dcf0 0%, #f1ecf8 42%, #d9cfea 100%);
       border-radius: 190px 190px 9px 9px;
       isolation: isolate;
     }
@@ -95,7 +95,7 @@
       content: "";
       position: absolute;
       inset: 45% 0 0;
-      background: linear-gradient(transparent, rgba(61,38,27,.38));
+      background: linear-gradient(transparent, rgba(45,32,70,.38));
       z-index: 2;
       pointer-events: none;
     }
@@ -103,7 +103,7 @@
       position: absolute;
       z-index: 0;
       width: 175px; height: 175px;
-      background: #fcf2e9;
+      background: #f7f2fd;
       opacity: .42;
       border-radius: 50%;
       top: 15%; right: -12%;
@@ -112,7 +112,7 @@
       width: 115px; height: 115px;
       top: 43%; left: -7%; right: auto;
       opacity: .28;
-      background: #c8aaa0;
+      background: #b4a3d4;
     }
     .cover__fallback {
       position: absolute;
@@ -121,8 +121,8 @@
       transform: translateY(-50%);
       text-align: center;
       font-family: var(--font-serif);
-      color: #fffaf3;
-      text-shadow: 0 3px 15px rgba(135, 83, 60, .16);
+      color: #fcfaff;
+      text-shadow: 0 3px 15px rgba(95, 70, 140, .16);
     }
     .cover__fallback strong { display: block; font-size: clamp(75px, 20vw, 115px); line-height: 1; font-weight: 400; letter-spacing: -.075em; }
     .cover__fallback small { display: block; margin-top: 18px; letter-spacing: .23em; font-size: 11px; }
@@ -158,7 +158,7 @@
     .intro__parents b { font-weight: 700; }
     .intro__parents .dot { color: var(--accent); margin: 0 7px; }
     .intro__title { font: 400 24px/1.65 var(--font-serif); margin: 37px 0 16px; }
-    .intro__message { font-size: clamp(13.5px, 3.9vw, 15px); line-height: 2.05; color: #62584f; margin: 0; }
+    .intro__message { font-size: clamp(13.5px, 3.9vw, 15px); line-height: 2.05; color: #5a5266; margin: 0; }
     .section { padding: 66px 28px; text-align: center; }
     .section--tint { background: var(--cream); }
     .section__heading { margin: 10px 0 11px; font: 400 26px/1.5 var(--font-serif); }
@@ -166,8 +166,8 @@
     .section__ornament { display: flex; gap: 12px; align-items: center; justify-content: center; margin: 0 0 28px; color: var(--accent); }
     .section__ornament::before, .section__ornament::after { content: ""; height: 1px; width: 39px; background: var(--line); }
     .section__ornament .ornament { width: 18px; height: 18px; }
-    .date-card { border: 1px solid #e4d9ce; background: rgba(255,255,255,.58); padding: 29px 18px 30px; border-radius: 6px; }
-    .date-card__month { font-family: var(--font-serif); font-size: 15px; color: #7a6656; letter-spacing: .14em; }
+    .date-card { border: 1px solid #ddd5eb; background: rgba(255,255,255,.58); padding: 29px 18px 30px; border-radius: 6px; }
+    .date-card__month { font-family: var(--font-serif); font-size: 15px; color: #6e5a8c; letter-spacing: .14em; }
     /* SAVE THE DATE: 반응형 월간 달력 */
     .date-card__calendar { width: 100%; max-width: 298px; margin: 22px auto 3px; }
     .date-card__weekdays, .date-card__days {
@@ -177,7 +177,7 @@
     }
     .date-card__weekdays { margin-bottom: 11px; }
     .date-card__weekday-label {
-      font-size: 12px; color: #7a6656; font-weight: 600;
+      font-size: 12px; color: #6e5a8c; font-weight: 600;
       line-height: 26px; letter-spacing: .02em;
     }
     .date-card__weekday-label:first-child { color: var(--accent-dark); }
@@ -197,7 +197,7 @@
       background: var(--accent-dark);
       color: #fff;
       font-weight: 700;
-      box-shadow: 0 4px 12px rgba(155, 104, 86, .28);
+      box-shadow: 0 4px 12px rgba(122, 95, 168, .28);
     }
     /* 돌잔치 날짜 위의 작은 하트 */
     .date-card__date--event::after {
@@ -210,7 +210,7 @@
               mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.2 0 3.6 1.2 5.3 3.1 1.7-1.9 3.1-3.1 5.3-3.1 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21Z'/%3E%3C/svg%3E") center / contain no-repeat;
     }
     .date-card__date--empty { visibility: hidden; }
-    .date-card__divider { height: 1px; background: #e7ded5; margin: 25px auto 21px; width: 62%; }
+    .date-card__divider { height: 1px; background: #e3ddee; margin: 25px auto 21px; width: 62%; }
     .date-card__time { font-size: 17px; font-weight: 600; }
     .date-card__note { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
     /* D-day 카운트다운 */
@@ -231,13 +231,13 @@
       aspect-ratio: 4 / 5;
       overflow: hidden;
       border-radius: 4px;
-      background: linear-gradient(145deg, #e7d7c7, #f9ede1 67%, #e4c5af);
+      background: linear-gradient(145deg, #e6dff2, #f6f2fb 67%, #d8cceb);
       cursor: zoom-in;
     }
-    .photo-card:nth-child(2) { background: linear-gradient(145deg,#d9dfd2,#f4f0e4 70%,#dadac6); }
-    .photo-card:nth-child(3) { background: linear-gradient(145deg,#eaded9,#f8f0ea 55%,#ddd0cc); }
-    .photo-card:nth-child(4) { background: linear-gradient(145deg,#e4d8c4,#f9eadf 60%,#dbc4a4); }
-    .photo-card__placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; position:absolute; inset:0; color:#9f8877; font-family:var(--font-serif); }
+    .photo-card:nth-child(2) { background: linear-gradient(145deg,#dfd9ee,#f5f1fa 70%,#d2c8e6); }
+    .photo-card:nth-child(3) { background: linear-gradient(145deg,#ece4f3,#f8f4fb 55%,#ddd2ea); }
+    .photo-card:nth-child(4) { background: linear-gradient(145deg,#e2daf0,#f7f2fc 60%,#cfc1e6); }
+    .photo-card__placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; position:absolute; inset:0; color:#8e7fac; font-family:var(--font-serif); }
     .photo-card__placeholder span { font-size: 31px; font-weight:400; opacity:.65; }
     .photo-card__placeholder small { font-size: 11px; margin-top: 8px; }
     .photo-card img { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; }
@@ -248,12 +248,12 @@
     .gallery__hint { display:flex; justify-content:center; gap:7px; align-items:center; margin-top:19px; color:var(--muted); font-size:13px; }
     .gallery__hint svg { width:14px; height:14px; }
     .venue-card { background:#fff; padding:30px 22px 24px; border:1px solid var(--line); border-radius:6px; }
-    .venue-card__symbol { display:grid; place-items:center; margin:0 auto 17px; width:64px; height:64px; border-radius:50%; background:#f3eae2; color:var(--accent-dark); }
+    .venue-card__symbol { display:grid; place-items:center; margin:0 auto 17px; width:64px; height:64px; border-radius:50%; background:#efe9f8; color:var(--accent-dark); }
     .venue-card__symbol svg { width:29px; height:29px; }
     /* 네이버 지도: Client ID를 입력하지 않았을 때는 OSM 위치 미리보기가 표시됩니다. */
     .venue-card__map {
       position:relative; width:100%; height:clamp(220px, 66vw, 300px);
-      margin:0 auto 22px; background:#eee8e1; border:1px solid #eee4db;
+      margin:0 auto 22px; background:#ebe7f2; border:1px solid #e8e1f2;
       border-radius:6px; overflow:hidden;
     }
     .venue-card__map iframe, .venue-card__map-canvas {
@@ -268,12 +268,12 @@
     }
     .venue-card__name { font:700 21px/1.5 var(--font-serif); margin:0 0 8px; }
     .venue-card__hall { font-size:14px; color:var(--muted); margin:0 0 14px; }
-    .venue-card__address { font-size:15px; color:#5b524b; line-height:1.75; margin:0 0 23px; }
+    .venue-card__address { font-size:15px; color:#534b5f; line-height:1.75; margin:0 0 23px; }
     .button { display:flex; align-items:center; justify-content:center; gap:9px; width:100%; min-height:52px; border-radius:4px; text-decoration:none; font-size:15px; font-weight:600; border:1px solid transparent; cursor:pointer; transition:filter .2s ease; }
     .button:hover { filter:brightness(.97); }
     .button--naver { background:#03c75a; color:white; }
     .button--naver strong { display:grid; place-items:center; width:20px; height:20px; background:white; color:#03c75a; border-radius:4px; font-size:14px; line-height:1; font-family:Arial, sans-serif; }
-    .button--subtle { border-color:#e2d9d0; color:var(--ink); background:#fff; margin-top:9px; }
+    .button--subtle { border-color:#ddd6ea; color:var(--ink); background:#fff; margin-top:9px; }
     .button svg { width:17px; height:17px; }
     .venue-card__note { margin:18px 0 0; font-size:13px; line-height:1.8; color:var(--muted); }
     .accounts__details { text-align:left; border:1px solid var(--line); border-radius:6px; background:white; overflow:hidden; }
@@ -281,25 +281,25 @@
     .accounts__details summary::-webkit-details-marker { display:none; }
     .accounts__chevron { width:18px; height:18px; color:var(--accent); transition:transform .2s ease; }
     .accounts__details[open] .accounts__chevron { transform:rotate(180deg); }
-    .accounts__body { padding:1px 20px 17px; border-top:1px solid #f0e9e2; }
+    .accounts__body { padding:1px 20px 17px; border-top:1px solid #eee9f5; }
     .account { padding:19px 0 13px; }
-    .account + .account { border-top:1px solid #f0e9e2; }
+    .account + .account { border-top:1px solid #eee9f5; }
     .account__label { color:var(--accent-dark); font-size:13px; margin:0 0 10px; font-weight:600; }
     .account__bank { color:var(--ink); font-size:15px; font-weight:600; }
     .account__holder { color:var(--muted); font-size:13px; margin-top:6px; }
     .account__line { display:flex; justify-content:space-between; gap:10px; align-items:center; }
-    .account__number { font-size:15px; color:#4f4740; word-break:break-all; margin-top:5px; letter-spacing:.02em; font-variant-numeric:tabular-nums; }
-    .copy-button { border:1px solid #e6ddd4; background:#faf8f5; border-radius:4px; padding:10px 14px; font-size:13px; color:#5f5348; flex:0 0 auto; cursor:pointer; }
+    .account__number { font-size:15px; color:#473f54; word-break:break-all; margin-top:5px; letter-spacing:.02em; font-variant-numeric:tabular-nums; }
+    .copy-button { border:1px solid #e1daee; background:#f9f7fc; border-radius:4px; padding:10px 14px; font-size:13px; color:#574c6a; flex:0 0 auto; cursor:pointer; }
     .copy-button:disabled { opacity:.45; cursor:not-allowed; }
     .accounts__note { margin:15px 0 0; font-size:13px; color:var(--muted); line-height:1.9; }
-    .footer { padding:61px 24px 49px; text-align:center; background:#f0e8df; }
+    .footer { padding:61px 24px 49px; text-align:center; background:#ece5f5; }
     .footer__flower { margin-bottom:16px; }
     .footer__flower .ornament { width:32px; height:32px; }
     .footer__title { font:400 20px/1.7 var(--font-serif); margin:0 0 13px; }
     .footer__sub { color:var(--muted); font-size:13px; margin:0 0 28px; }
-    .footer__bottom { font-size:11px; letter-spacing:.18em; color:#9a8576; }
-    .share-button { border:1px solid #cdbdaf; background:transparent; color:#5a4f46; padding:13px 22px; border-radius:100px; cursor:pointer; font-size:14px; margin-bottom:40px; }
-    .lightbox { position:fixed; inset:0; background:rgba(24,20,18,.94); z-index:1000; display:none; align-items:center; justify-content:center; padding:70px 14px; }
+    .footer__bottom { font-size:11px; letter-spacing:.18em; color:#8f81a8; }
+    .share-button { border:1px solid #c7bbdc; background:transparent; color:#514765; padding:13px 22px; border-radius:100px; cursor:pointer; font-size:14px; margin-bottom:40px; }
+    .lightbox { position:fixed; inset:0; background:rgba(22,18,30,.94); z-index:1000; display:none; align-items:center; justify-content:center; padding:70px 14px; }
     .lightbox[aria-hidden="false"] { display:flex; }
     .lightbox__image { display:block; max-width:100%; max-height:78vh; object-fit:contain; }
     .lightbox__close, .lightbox__arrow { position:absolute; display:grid; place-items:center; border:0; color:white; background:rgba(255,255,255,.13); border-radius:50%; cursor:pointer; }
@@ -307,7 +307,7 @@
     .lightbox__arrow { width:44px; height:44px; top:50%; transform:translateY(-50%); font-size:30px; }
     .lightbox__arrow--prev { left:12px; } .lightbox__arrow--next { right:12px; }
     .lightbox__counter { position:absolute; bottom:25px; color:#fff; opacity:.8; font-size:12px; letter-spacing:.15em; }
-    .toast { position:fixed; bottom:25px; left:50%; transform:translate(-50%,10px); max-width:min(90vw,400px); padding:12px 18px; border-radius:9px; background:#493f37; color:#fff; font-size:14px; box-shadow:0 9px 25px rgba(0,0,0,.15); opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; z-index:2000; white-space:nowrap; }
+    .toast { position:fixed; bottom:25px; left:50%; transform:translate(-50%,10px); max-width:min(90vw,400px); padding:12px 18px; border-radius:9px; background:#433b4f; color:#fff; font-size:14px; box-shadow:0 9px 25px rgba(0,0,0,.15); opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; z-index:2000; white-space:nowrap; }
     .toast.show { opacity:1; transform:translate(-50%,0); }
     @media (max-width:380px) { .intro__title { font-size:21px; } .section { padding:57px 20px; } .cover { margin:0 13px; } .site-heading { padding-left:20px; padding-right:20px; } .gallery { padding-left:13px; padding-right:13px; } }
     @media (min-width:600px) { body { padding:42px 0; } .page { border-radius:8px; } }
