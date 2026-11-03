@@ -2,3 +2,6 @@ _site/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+
+# 서후 초대장 원본 사진은 PC에만 보관 (사이트는 web/ 폴더의 웹용 사진 사용)
+assets/seohoo/images/*.jpg

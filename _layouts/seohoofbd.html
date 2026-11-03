@@ -221,16 +221,22 @@
     .dday__message { margin: 16px 0 0; font: 400 15px/1.7 var(--font-serif); color: var(--ink); }
     .dday__message b { color: var(--accent-dark); font-weight: 700; }
     .gallery { padding-left: 20px; padding-right: 20px; }
-    .gallery__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .gallery__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+    .photo-card--more { display: none !important; }
+    .gallery__grid.is-expanded .photo-card--more { display: block !important; }
+    .gallery__more { display:inline-flex; align-items:center; gap:6px; margin-top:22px; padding:12px 24px; border:1px solid #c7bbdc; border-radius:100px; background:#fff; color:var(--accent-dark); font-size:14px; font-weight:600; cursor:pointer; }
+    .gallery__more[hidden] { display:none; }
+    .gallery__more svg { width:16px; height:16px; transition:transform .2s ease; }
+    .gallery__more[aria-expanded="true"] svg { transform:rotate(180deg); }
     .photo-card {
       display: block;
       position: relative;
       border: 0;
       padding: 0;
       width: 100%;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 1 / 1;
       overflow: hidden;
-      border-radius: 4px;
+      border-radius: 3px;
       background: linear-gradient(145deg, #e6dff2, #f6f2fb 67%, #d8cceb);
       cursor: zoom-in;
     }
@@ -238,14 +244,14 @@
     .photo-card:nth-child(3) { background: linear-gradient(145deg,#ece4f3,#f8f4fb 55%,#ddd2ea); }
     .photo-card:nth-child(4) { background: linear-gradient(145deg,#e2daf0,#f7f2fc 60%,#cfc1e6); }
     .photo-card__placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; position:absolute; inset:0; color:#8e7fac; font-family:var(--font-serif); }
-    .photo-card__placeholder span { font-size: 31px; font-weight:400; opacity:.65; }
-    .photo-card__placeholder small { font-size: 11px; margin-top: 8px; }
+    .photo-card__placeholder span { font-size: 20px; font-weight:400; opacity:.65; }
+    .photo-card__placeholder small { font-size: 10px; margin-top: 5px; }
     .photo-card img { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; }
     .photo-card.has-image img { display:block; animation: photo-in .7s ease both; }
     @keyframes photo-in { from { opacity:0; } to { opacity:1; } }
     .photo-card.has-image .photo-card__placeholder { display:none; }
     @media (hover:hover) { .photo-card.has-image:hover img { transform:scale(1.045); } }
-    .gallery__hint { display:flex; justify-content:center; gap:7px; align-items:center; margin-top:19px; color:var(--muted); font-size:13px; }
+    .gallery__hint { display:flex; justify-content:center; gap:7px; align-items:center; margin-top:16px; color:var(--muted); font-size:13px; }
     .gallery__hint svg { width:14px; height:14px; }
     .venue-card { background:#fff; padding:30px 22px 24px; border:1px solid var(--line); border-radius:6px; }
     .venue-card__symbol { display:grid; place-items:center; margin:0 auto 17px; width:64px; height:64px; border-radius:50%; background:#efe9f8; color:var(--accent-dark); }
@@ -405,6 +411,10 @@
       <div class="gallery__grid reveal" id="gallery-grid">
         <!-- 아래 JavaScript의 photos.gallery 목록으로 생성됩니다. -->
       </div>
+      <button class="gallery__more" id="gallery-more" type="button" aria-controls="gallery-grid" aria-expanded="false" hidden>
+        <span>사진 더보기</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
       <p class="gallery__hint">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 8V4h4M21 8V4h-4M3 16v4h4M21 16v4h-4"/></svg>
         사진을 누르면 크게 볼 수 있어요.
@@ -488,12 +498,11 @@
       // '../assets/' 경로라서 PC에서 파일을 바로 열어도, 사이트(/seohoofbd)에서도 사진이 보입니다.
       photos: {
         main: '../assets/seohoo/images/web/main.jpg',
-        gallery: [
-          '../assets/seohoo/images/web/01.jpg',
-          '../assets/seohoo/images/web/02.jpg',
-          '../assets/seohoo/images/web/03.jpg',
-          '../assets/seohoo/images/web/04.jpg'
-        ]
+        // web/00.jpg ~ web/35.jpg (36.jpg는 대표 사진 main.jpg와 같은 사진이라 제외)
+        gallery: Array.from({ length: 36 }, (_, i) =>
+          `../assets/seohoo/images/web/${String(i).padStart(2, '0')}.jpg`),
+        // 처음에 보여줄 사진 수. 나머지는 '사진 더보기'를 누르면 펼쳐집니다.
+        galleryPreviewCount: 9
       },
       venue: {
         name: '그랜드웨딩홀',
@@ -696,12 +705,15 @@
       $('cover').classList.add('has-image');
     });
 
-    // 사진 갤러리: 파일이 존재할 때만 사진 확대 기능을 활성화합니다.
-    const activePhotos = [];
+    // 사진 갤러리: 처음 몇 장만 보여주고, 나머지는 '더보기'로 펼칩니다.
+    // 숨겨진 사진은 loading="lazy"라서 펼치기 전에는 내려받지 않습니다.
+    let activePhotos = [...INVITATION.photos.gallery];
     const galleryGrid = $('gallery-grid');
+    const previewCount = INVITATION.photos.galleryPreviewCount || activePhotos.length;
     INVITATION.photos.gallery.forEach((src, index) => {
       const card = document.createElement('button');
       card.className = 'photo-card';
+      if (index >= previewCount) card.classList.add('photo-card--more');
       card.type = 'button';
       card.setAttribute('aria-label', `${INVITATION.babyName} 사진 ${index + 1}`);
       const placeholder = document.createElement('div');
@@ -714,37 +726,50 @@
       const img = document.createElement('img');
       img.alt = `${INVITATION.babyName}의 성장 사진 ${index + 1}`;
       img.loading = 'lazy';
+      img.decoding = 'async';
+      img.onload = () => card.classList.add('has-image');
+      // 파일이 없으면 칸을 없애고 확대 보기 목록에서도 뺍니다.
+      img.onerror = () => {
+        card.remove();
+        activePhotos = activePhotos.filter(p => p !== src);
+        updateMoreButton();
+      };
+      img.src = src;
       card.append(placeholder, img);
       galleryGrid.appendChild(card);
-      loadImage(src, () => {
-        img.src = src;
-        card.classList.add('has-image');
-        activePhotos.push({ src, index });
-      });
-      card.addEventListener('click', () => {
-        const photoIndex = activePhotos.findIndex(p => p.index === index);
-        if (photoIndex < 0) { showToast('이 자리에 사진을 넣어주세요.'); return; }
-        openLightbox(photoIndex);
-      });
+      card.addEventListener('click', () => openLightbox(activePhotos.indexOf(src)));
     });
 
-    // 사진 로딩 순서가 달라도 원래 설정된 순서대로 보여주기
+    const moreButton = $('gallery-more');
+    function updateMoreButton() {
+      const hiddenCount = galleryGrid.querySelectorAll('.photo-card--more').length;
+      moreButton.hidden = hiddenCount === 0;
+      const expanded = galleryGrid.classList.contains('is-expanded');
+      moreButton.setAttribute('aria-expanded', String(expanded));
+      moreButton.querySelector('span').textContent = expanded ? '사진 접기' : `사진 더보기 +${hiddenCount}`;
+    }
+    moreButton.addEventListener('click', () => {
+      const expanded = galleryGrid.classList.toggle('is-expanded');
+      updateMoreButton();
+      // 접을 때는 갤러리 제목 위치로 돌아갑니다.
+      if (!expanded) $('gallery-title').scrollIntoView({ block: 'start' });
+    });
+    updateMoreButton();
+
     let lightboxIndex = 0;
     let previouslyFocused = null;
-    function orderedPhotos() { return [...activePhotos].sort((a, b) => a.index - b.index); }
     function updateLightbox() {
-      const photos = orderedPhotos();
+      const photos = activePhotos;
       if (!photos.length) return;
       lightboxIndex = (lightboxIndex + photos.length) % photos.length;
-      $('lightbox-image').src = photos[lightboxIndex].src;
+      $('lightbox-image').src = photos[lightboxIndex];
       $('lightbox-counter').textContent = `${lightboxIndex + 1} / ${photos.length}`;
       $('lightbox-prev').hidden = photos.length < 2;
       $('lightbox-next').hidden = photos.length < 2;
     }
     function openLightbox(index) {
-      const photos = orderedPhotos();
-      const selected = activePhotos[index];
-      lightboxIndex = Math.max(0, photos.findIndex(p => p.index === selected?.index));
+      if (index < 0) return;
+      lightboxIndex = index;
       previouslyFocused = document.activeElement;
       $('lightbox').setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
