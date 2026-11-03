@@ -246,8 +246,9 @@
     .photo-card__placeholder { display:flex; flex-direction:column; align-items:center; justify-content:center; position:absolute; inset:0; color:#8e7fac; font-family:var(--font-serif); }
     .photo-card__placeholder span { font-size: 20px; font-weight:400; opacity:.65; }
     .photo-card__placeholder small { font-size: 10px; margin-top: 5px; }
-    .photo-card img { display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; }
-    .photo-card.has-image img { display:block; animation: photo-in .7s ease both; }
+    /* display:none이면 lazy 이미지가 내려받아지지 않으므로, 로드 전에는 투명하게만 숨깁니다. */
+    .photo-card img { display:block; opacity:0; position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .35s ease; }
+    .photo-card.has-image img { opacity:1; animation: photo-in .7s ease both; }
     @keyframes photo-in { from { opacity:0; } to { opacity:1; } }
     .photo-card.has-image .photo-card__placeholder { display:none; }
     @media (hover:hover) { .photo-card.has-image:hover img { transform:scale(1.045); } }
